@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Mortal Kombat: Shaolin Monks — MOD by RelaxDirk</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --blood: #8b0000;
+      --blood-bright: #cc0000;
+      --gold: #c9a84c;
+      --gold-dim: #7a5c1e;
+      --ember: #ff4500;
+      --ash: #1a1a1a;
+      --smoke: #2a2a2a;
+      --bone: #e8dcc8;
+      --shadow: #0a0a0a;
+      --glow-red: rgba(139, 0, 0, 0.6);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--shadow);
+      color: var(--bone);
+      font-family: 'Cinzel', serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.08) 2px,
+          rgba(0, 0, 0, 0.08) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ========================= HEADER ========================= */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139, 0, 0, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 50% 100%, rgba(255, 69, 0, 0.12) 0%, transparent 70%),
+        linear-gradient(180deg, #0a0a0a 0%, #110000 50%, #0a0a0a 100%);
+    }
+
+    .header-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 L55 30 L30 55 L5 30 Z' fill='none' stroke='rgba(139,0,0,0.08)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      animation: fadeInDown 1.2s ease both;
+    }
+
+    .logo-container img {
+      max-width: min(600px, 90vw);
+      filter: drop-shadow(0 0 40px rgba(139, 0, 0, 0.8)) drop-shadow(0 0 80px rgba(255, 69, 0, 0.3));
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .mod-author {
+      position: relative;
+      z-index: 2;
+      margin-top: 1.5rem;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(0.7rem, 2vw, 1rem);
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+      animation: fadeInDown 1.4s ease both;
+    }
+
+    .download-btn {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--blood) 0%, #4a0000 100%);
+      color: var(--bone);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-dim);
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      transition: all 0.3s;
+      animation: fadeInUp 1.6s ease both;
+      box-shadow: 0 0 30px rgba(139, 0, 0, 0.4), inset 0 1px 0 rgba(201, 168, 76, 0.2);
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, var(--blood-bright) 0%, var(--blood) 100%);
+      box-shadow: 0 0 60px rgba(139, 0, 0, 0.8), 0 0 120px rgba(255, 69, 0, 0.3);
+      transform: scale(1.04);
+      color: #fff;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: rgba(201, 168, 76, 0.4);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-hint::after {
+      content: '▼';
+      font-size: 0.8rem;
+      color: var(--blood);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(6px);
+      }
+    }
+
+    /* ========================= SECTION TITLE ========================= */
+    .section-title {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(1.4rem, 4vw, 2.5rem);
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.4);
+      letter-spacing: 0.2em;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blood), var(--gold), var(--blood), transparent);
+      margin: 1rem auto 0;
+    }
+
+    /* ========================= CHARACTER GRID ========================= */
+    #characters {
+      padding: 0 1rem 2rem;
+    }
+
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .char-thumb {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      transition: all 0.3s;
+      aspect-ratio: 1;
+      background: #0f0000;
+    }
+
+    .char-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+      z-index: 1;
+      transition: opacity 0.3s;
+    }
+
+    .char-thumb:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.3), 0 0 40px rgba(139, 0, 0, 0.4);
+      transform: translateY(-3px) scale(1.03);
+      z-index: 5;
+    }
+
+    .char-thumb:hover::before {
+      opacity: 0.4;
+    }
+
+    .char-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.8) contrast(1.1);
+      transition: filter 0.3s;
+    }
+
+    .char-thumb:hover img {
+      filter: saturate(1.2) contrast(1.15);
+    }
+
+    .char-thumb .char-name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 6px 6px 8px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+      color: var(--bone);
+      text-shadow: 0 1px 3px #000;
+      line-height: 1.2;
+    }
+
+    .char-thumb .char-name .tag {
+      display: inline-block;
+      font-size: 0.5rem;
+      background: var(--blood);
+      color: #fff;
+      padding: 1px 4px;
+      margin-top: 2px;
+      letter-spacing: 0.08em;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .char-thumb .char-name .tag.boss {
+      background: var(--gold-dim);
+    }
+
+    /* ========================= CHARACTER DETAIL CARDS ========================= */
+    #roster {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2px;
+    }
+
+    .char-card {
+      background: linear-gradient(135deg, #0e0000 0%, #111 100%);
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      overflow: hidden;
+      transition: border-color 0.3s;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .char-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+    }
+
+    .char-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      min-height: 90px;
+      background: #070000;
+    }
+
+    .char-card-header img {
+      width: 80px;
+      height: 90px;
+      object-fit: cover;
+      object-position: top center;
+      flex-shrink: 0;
+      filter: saturate(0.85);
+    }
+
+    .char-card-header-info {
+      flex: 1;
+      padding: 0.8rem 1rem;
+    }
+
+    .char-card-header-info h3 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 0.85rem;
+      color: var(--gold);
+      line-height: 1.3;
+      text-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+    }
+
+    .char-badge {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.55rem;
+      padding: 2px 8px;
+      margin-top: 4px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .badge-story {
+      background: rgba(139, 0, 0, 0.6);
+      color: #ffb3b3;
+      border: 1px solid rgba(139, 0, 0, 0.8);
+    }
+
+    .badge-boss {
+      background: rgba(122, 92, 30, 0.6);
+      color: #ffe9a0;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+    }
+
+    .badge-secret {
+      background: rgba(0, 100, 80, 0.6);
+      color: #a0ffe9;
+      border: 1px solid rgba(0, 200, 160, 0.4);
+    }
+
+    .badge-enemy {
+      background: rgba(30, 30, 60, 0.6);
+      color: #b0b0ff;
+      border: 1px solid rgba(100, 100, 200, 0.4);
+    }
+
+    .char-card-body {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    .no-moves {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(232, 220, 200, 0.25);
+      text-align: center;
+      padding: 1rem 0;
+      letter-spacing: 0.1em;
+    }
+
+    .moves-section {
+      margin-bottom: 0.8rem;
+    }
+
+    .moves-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blood-bright);
+      font-family: 'Share Tech Mono', monospace;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+      padding-bottom: 3px;
+    }
+
+    .moves-label.special {
+      color: var(--gold-dim);
+    }
+
+    .moves-label.finisher {
+      color: #ff4500;
+    }
+
+    .move-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 3px 0;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .move-label {
+      color: rgba(232, 220, 200, 0.4);
+      font-size: 0.6rem;
+      white-space: nowrap;
+      min-width: 75px;
+      flex-shrink: 0;
+    }
+
+    .move-input {
+      color: var(--bone);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      align-items: center;
+      line-height: 1.6;
+    }
+
+    .btn-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(139, 0, 0, 0.25);
+      border: 1px solid rgba(139, 0, 0, 0.5);
+      color: #ffcccc;
+      padding: 1px 5px;
+      font-size: 0.62rem;
+      min-width: 18px;
+      font-family: 'Share Tech Mono', monospace;
+      border-radius: 2px;
+    }
+
+    .btn-key.special-btn {
+      background: rgba(122, 92, 30, 0.25);
+      border-color: rgba(201, 168, 76, 0.4);
+      color: #ffe9a0;
+    }
+
+    .btn-key.dir-btn {
+      background: rgba(60, 60, 80, 0.3);
+      border-color: rgba(100, 100, 150, 0.4);
+      color: #c8c8ff;
+      font-size: 0.7rem;
+    }
+
+    /* DualShock face button colors */
+    .btn-key.btn-square {
+      background: rgba(210, 15, 140, 0.2);
+      border-color: rgba(210, 15, 140, 0.55);
+      color: #ff88dd;
+      text-shadow: 0 0 6px rgba(210, 15, 140, 0.6);
+    }
+
+    .btn-key.btn-triangle {
+      background: rgba(0, 165, 110, 0.2);
+      border-color: rgba(0, 165, 110, 0.55);
+      color: #00f0aa;
+      text-shadow: 0 0 6px rgba(0, 165, 110, 0.6);
+    }
+
+    .btn-key.btn-circle {
+      background: rgba(210, 0, 25, 0.2);
+      border-color: rgba(210, 0, 25, 0.55);
+      color: #ff7777;
+      text-shadow: 0 0 6px rgba(210, 0, 25, 0.6);
+    }
+
+    .btn-key.btn-cross {
+      background: rgba(0, 90, 210, 0.2);
+      border-color: rgba(0, 90, 210, 0.55);
+      color: #88aaff;
+      text-shadow: 0 0 6px rgba(0, 90, 210, 0.6);
+    }
+
+    .btn-plus {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.55rem;
+      padding: 0 1px;
+    }
+
+    .move-note {
+      font-size: 0.55rem;
+      color: rgba(255, 140, 0, 0.7);
+      display: block;
+      margin-top: 2px;
+      margin-left: 75px;
+      font-style: italic;
+    }
+
+    /* ========================= SECTION DIVIDER ========================= */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.5));
+    }
+
+    .divider::after {
+      background: linear-gradient(90deg, rgba(139, 0, 0, 0.5), transparent);
+    }
+
+    .divider-icon {
+      color: var(--blood);
+      font-size: 1.2rem;
+    }
+
+    /* ========================= CHEAT CODE ========================= */
+    .cheat-section {
+      max-width: 700px;
+      margin: 2rem auto 4rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0e0000, #0a0000);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      text-align: center;
+      position: relative;
+    }
+
+    .cheat-section::before {
+      content: '⬡';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: var(--gold);
+      background: var(--shadow);
+      padding: 0 0.5rem;
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.6);
+    }
+
+    .cheat-section h3 {
+      font-family: 'Cinzel Decorative', cursive;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .cheat-code {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--bone);
+      line-height: 2;
+    }
+
+    .cheat-prefix {
+      font-size: 0.7rem;
+      color: rgba(232, 220, 200, 0.4);
+      display: block;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ========================= CREDITS ========================= */
+    .credits-section {
+      background: #070000;
+      border-top: 1px solid rgba(139, 0, 0, 0.3);
+      padding: 3rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .credits-section h2 {
+      font-family: 'Cinzel Decorative', cursive;
+      color: var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 0.25em;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+    }
+
+    .credits-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .credit-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .credit-item img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border: 1px solid rgba(139, 0, 0, 0.4);
+      filter: grayscale(0.3) contrast(1.1);
+      transition: all 0.3s;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .credit-item img:hover {
+      filter: grayscale(0) contrast(1.2);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
+    }
+
+    .credit-item span {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(232, 220, 200, 0.5);
+      letter-spacing: 0.1em;
+    }
+
+    /* ========================= BACK TO TOP ========================= */
+    .back-top {
+      display: block;
+      text-align: center;
+      padding: 1rem;
+      color: rgba(201, 168, 76, 0.4);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .back-top:hover {
+      color: var(--gold);
+    }
+
+    /* ========================= ANIMATIONS ========================= */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ========================= FILTER BAR ========================= */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      padding: 1rem 1rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1.2rem;
+      background: rgba(139, 0, 0, 0.15);
+      border: 1px solid rgba(139, 0, 0, 0.35);
+      color: rgba(232, 220, 200, 0.6);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(139, 0, 0, 0.4);
+      border-color: var(--blood-bright);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(139, 0, 0, 0.4);
+    }
+
+    .filter-btn.active {
+      background: var(--blood);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .char-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 8px;
+      }
+
+      #roster {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header id="top">
+    <div class="header-bg"></div>
+    <div class="logo-container">
+      <img src="https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/UMKSM.png"
+        alt="Ultimate Mortal Kombat Shaolin Monks Logo">
+    </div>
+    <p class="mod-author">MOD CREATED BY: RELAXDIRK</p>
+    <a class="download-btn"
+      href="https://download1325.mediafire.com/1y9dub6ui2fgIAS-nxkVimZEm7Z5kLuRKX0OB4sEIWC58QgtrGh7BtL00iW74U5alHgukFCsqdJCXczOTWe34Nnw4L8wPoP3bD7L6VjtVmR4o0fQACajs7zDUhZwXkS-JsOb1p4cZrA__doJAHI2U__EnH8ypPZ9cAOSAtgcJKjx/nhqwenz4yx6n6ad/UMKSM+VERSION+II+2.6+%28Second+Update%29.rar"
+      target="_blank">
+      ⬡ Download Version 2.6 — Second Update ⬡
+    </a>
+    <div class="scroll-hint">SCROLL</div>
+  </header>
+
+  <!-- CHARACTERS THUMBNAIL GRID -->
+  <div class="section-title">
+    <h2>The Roster</h2>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">ALL</button>
+    <button class="filter-btn" onclick="filterCards('story', this)">STORY</button>
+    <button class="filter-btn" onclick="filterCards('boss', this)">BOSS</button>
+    <button class="filter-btn" onclick="filterCards('enemy', this)">ENEMY</button>
+    <button class="filter-btn" onclick="filterCards('secret', this)">SECRET</button>
+  </div>
+
+  <div id="characters">
+    <div class="char-grid" id="thumbGrid"></div>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <div class="section-title">
+    <h2>Moves &amp; Finishers</h2>
+  </div>
+
+  <!-- CHARACTER CARDS -->
+  <div id="roster"></div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <!-- CHEAT CODE -->
+  <div class="cheat-section" style="margin: 0 auto 4rem; padding: 2rem; max-width:700px;">
+    <h3>Unlock Everything</h3>
+    <div class="cheat-code">
+      <span class="cheat-prefix">Hover over OPTIONS and HOLD L2, then press:</span>
+      <span id="cheatDisplay"></span>
+    </div>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="credits-section">
+    <h2>Special Thanks</h2>
+    <div class="credits-grid" id="creditsGrid"></div>
+  </div>
+
+  <a href="#top" class="back-top">▲ Return to the Top ▲</a>
+
+  <script>
+    // ─── DATA ───────────────────────────────────────────────────────────────────
+    const BASE = 'https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/';
+
+    const CHARS = [
+      {
+        id: 'baraka', name: 'Baraka', tag: 'Story', type: 'story',
+        img: 'mksm_baraka.jpg',
+        moves: { combos: ['◻,◻,O,△,△,△,◻,O'], finishers: ['Multality: →,←,→,→,△'] }
+      },
+      {
+        id: 'bossbaraka', name: 'Baraka', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossbaraka.jpg',
+        moves: {
+          combos: ['◻,◻,X,O,△,R2', '△,△,◻,R2', 'O,◻,O'],
+          specials: ['R1+◻', 'R1+◻,◻', 'R1+◻,△', 'R1+△', 'R1+O', '(Air) R1+△']
+        }
+      },
+      {
+        id: 'mileena', name: 'Mileena', tag: 'Story', type: 'story',
+        img: 'mksm_mileena.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,△,◻', '◻,◻,◻,◻,△,O', '◻,◻,◻,◻,△,X', '△,△,△,O', '△,△,△'],
+          specials: ['R1+◻,◻,◻', 'R1+△', 'R1+O'],
+          other: ['Attack: O', 'Grab: R2']
+        }
+      },
+      {
+        id: 'bossmileena', name: 'Mileena', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossmileena.jpg',
+        moves: {
+          combos: ['◻,◻,X,O,△,O', '△,△,O', 'O,O,◻,△,O'],
+          specials: ['R1+◻,◻', 'R1+△', 'R1+O', '(Air) R1+◻'],
+          finishers: ['Fatality: ←,→,↓,→,◻ — MILEENA\'S HIDEOUT (VS)']
+        }
+      },
+      {
+        id: 'kabal', name: 'Kabal', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_kabal.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,O,△,△', '△,△,△', 'O,O,X,X,O,△'],
+          specials: ['R1+◻', '(Air) R1+◻', 'R1+△', '(Air) R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'tarkata', name: 'Tarkata', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_tarkata.jpg',
+        moves: {
+          combos: ['◻,◻,X,△,O,△,△', '△,△,◻,X,R2', 'O,O,◻,X,△,O'],
+          specials: ['R1+◻,◻,◻', 'R1+△,△,△', 'Grab: R1+O']
+        }
+      },
+      {
+        id: 'oniwarlord', name: 'Oni Warlord', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_oniwarlord.jpg',
+        moves: {}
+      },
+      {
+        id: 'kitana', name: 'Kitana', tag: 'Story', type: 'story',
+        img: 'mksm_kitana.jpg',
+        moves: {
+          combos: ['◻,◻,△,△,O', '◻,◻,△,O,O', '◻,◻,O', '◻,◻,R2'],
+          finishers: ['Multality: ←,→,←,↓,△']
+        }
+      },
+      {
+        id: 'bosskitana', name: 'Kitana', tag: 'Boss', type: 'boss',
+        img: 'mksm_bosskitana.jpg',
+        moves: {
+          combos: ['◻,△,△,X', '◻,O,X,O', '△,△,X,O', 'O,△,△,O'],
+          specials: ['R1,◻', 'R1,△,△', 'R1,O', 'L1,O', '(Air) R1,O']
+        }
+      },
+      {
+        id: 'jade', name: 'Jade', tag: 'Story', type: 'story',
+        img: 'mksm_jade.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,△,O,O,△,△,△', '△,O,△,O,△', 'O,◻,◻,O,△,O'],
+          specials: ['R1+◻,◻,◻', 'R1+△', 'R1+O,O,O', '(Air) R1+△']
+        }
+      },
+      {
+        id: 'bossjade', name: 'Jade', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossjade.jpg',
+        moves: {
+          combos: ['◻,◻,X,◻,◻,△,△,△', '△,△,△', 'O,◻,◻,△,△,X'],
+          specials: ['R1+◻,◻', 'R1+△', '(Air) R1+△', 'R1+O,O,O']
+        }
+      },
+      {
+        id: 'sonya', name: 'Sonya', tag: 'Story', type: 'story',
+        img: 'mksm_sonya.jpg',
+        moves: {
+          combos: ['◻,◻,◻,△,O', '△,△,◻', 'O,O,X,◻,◻,△,△'],
+          specials: ['R1+◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'captain', name: 'Demon Captain', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_captain.jpg',
+        moves: {}
+      },
+      {
+        id: 'claysoldier', name: 'Clay Soldier', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_clay.jpg',
+        moves: {}
+      },
+      {
+        id: 'sub', name: 'Sub-Zero', tag: 'Story', type: 'story',
+        img: 'mksm_sub.jpg',
+        moves: {
+          combos: ['◻,◻,◻,O', '◻,◻,◻,◻', '◻,◻,◻,◻,O', '◻,◻,◻,◻,L1', '◻,◻,◻,◻,△,△', '△,△,△', '△,O,O']
+        }
+      },
+      {
+        id: 'bosssub', name: 'Sub-Zero', tag: 'Boss', type: 'boss',
+        img: 'mksm_bosssub.jpg',
+        moves: {
+          combos: ['◻,◻,◻', '◻,◻,◻,△,△', '◻,◻,◻,△,O', '◻,◻,◻,△,X', '△,△,△', '△,△,X'],
+          specials: ['R1+◻', 'R2+◻', 'R1+△,△', 'R1+△,O', 'R1+O', '(Air) R1+△'],
+          other: ['Attack 1: O', 'Attack 2: L1']
+        }
+      },
+      {
+        id: 'jax', name: 'Jax', tag: 'Story', type: 'story',
+        img: 'mksm_jax.jpg',
+        moves: {
+          combos: ['◻,△,◻,O', '△,△,O', 'O,△,◻,O'],
+          specials: ['R1+◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'smoke', name: 'Smoke', tag: 'Secret', type: 'secret',
+        img: 'mksm_smoke.jpg',
+        moves: {
+          combos: ['◻,◻,◻,X,◻,◻,O,△,△', '◻,△,O', '△,△,△,O', 'O,◻,◻,O,△,O'],
+          specials: ['R1+◻', 'R1+△', 'R1+O'],
+          finishers: ['Fatality: ←,→,←,→,◻ — GORO\'S LAIR ALT (VS)']
+        }
+      },
+      {
+        id: 'general', name: 'Demon General', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_general.jpg',
+        moves: {}
+      },
+      {
+        id: 'reddragon', name: 'Red Dragon', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_reddragon.jpg',
+        moves: {}
+      },
+      {
+        id: 'kun', name: 'Kung Lao', tag: 'Story', type: 'story',
+        img: 'mksm_kung.jpg',
+        moves: {}
+      },
+      {
+        id: 'ermac', name: 'Ermac', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossermac.jpg',
+        moves: {
+          combos: ['◻,◻,◻,△,O', '◻,◻,◻,△,X', '◻,◻,◻,△,R2', '◻,◻,◻,X', '◻,◻,◻,R2', '◻,◻,◻,R2,O,O', '△,△', '△,△,O', '△,△,X', '△,△,R2', 'O,△,O', 'O,△,X', 'O,△,X,R2'],
+          specials: ['R1+◻', '(Air) R1+◻', 'R1+△,△,△', 'R1+△,R2', 'R1+O,O,O', 'R1+R2'],
+          other: ['(Air) O', 'Grab: R2,R2,R2'],
+          finishers: ['Fatality: ←,↑,↓,↑,◻ — WARRIOR SHRINE ALT (VS)']
+        }
+      },
+      {
+        id: 'kintaro', name: 'Kintaro', tag: 'Story', type: 'story',
+        img: 'mksm_kintaro.jpg',
+        moves: {
+          other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Grab: R2', 'Taunt: R1+R2'],
+          specials: ['R1+◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'bosskintaro', name: 'Kintaro', tag: 'Boss', type: 'boss',
+        img: 'mksm_bosskintaro.jpg',
+        moves: {
+          other: ['Attack 1: ◻', 'Attack 2: △', 'Taunt: O'],
+          specials: ['R1+◻,◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'oni', name: 'Oni', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_oni.jpg',
+        moves: {}
+      },
+      {
+        id: 'archer', name: 'Demon Archer', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_archer.jpg',
+        moves: {}
+      },
+      {
+        id: 'cannondemon', name: 'Cannon Demon', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_cannondemon.jpg',
+        moves: {
+          other: ['Attack 1: ◻', 'Attack 2: △', 'Taunt: L1'],
+          specials: ['R1+◻,△,O', 'R1+△,△', 'R1+O']
+        }
+      },
+      {
+        id: 'liukang', name: 'Liu Kang', tag: 'Story', type: 'story',
+        img: 'mksm_liu.jpg',
+        moves: { combos: ['◻,◻,◻,◻'] }
+      },
+      {
+        id: 'shao', name: 'Shao Kahn', tag: 'Story', type: 'story',
+        img: 'mksm_shaokahn.jpg',
+        moves: {
+          combos: ['Basic: ◻,X,◻,X,O', 'Basic: △,△', 'Hammer: ◻,◻,X'],
+          specials: ['Basic: R1+◻,◻,◻', 'Basic: R1+△', 'Basic: R1+O,O', 'Hammer: R1+◻', 'Hammer: R1+△', 'Hammer: R1+O'],
+          other: ['Attack: O', 'Taunt: R1+R2']
+        }
+      },
+      {
+        id: 'bosskahn', name: 'Shao Kahn', tag: 'Boss', type: 'boss',
+        img: 'mksm_kahn.jpg',
+        moves: {
+          combos: ['Basic: ◻,X,O', 'Hammer: ◻,X,O'],
+          specials: ['Basic: R1+◻,◻,◻', 'Basic: R1+△', 'Hammer: R1+◻', 'Hammer: R1+△', 'Hammer: R1+O'],
+          other: ['Attack 1: △', 'Attack 2: O', 'Taunt: R1+O']
+        }
+      },
+      {
+        id: 'bossgoro', name: 'Goro', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossgoro.jpg',
+        moves: {
+          other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Taunt: L1', 'Grab: R2'],
+          specials: ['Basic: R1+◻,◻,◻,◻', 'Basic: R1+△,△', 'Basic: R1+△,R2', 'Basic: R1+O', 'Pillar: R1+◻', 'Pillar: R1+△', 'Pillar: R1+O', 'Pillar: L1+◻', 'Pillar Grab: R2'],
+          finishers: ['Fatality: →,←,→,←,◻ — WASTELAND BATTLE ARENA (VS)']
+        }
+      },
+      {
+        id: 'goro', name: 'Goro', tag: 'Story', type: 'story',
+        img: 'mksm_goro.jpg',
+        moves: {
+          other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Taunt: L1', 'Grab: R2'],
+          specials: ['R1+◻,◻,◻,◻', 'R1+△,△', 'R1+△,R2', 'R1+O']
+        }
+      },
+      {
+        id: 'maskguard', name: 'Mask Guard', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_shangs_masked_guards.jpg',
+        moves: {
+          combos: ['◻,◻,X,◻,O', '△,X,X,O', 'O,O,O,O'],
+          specials: ['R1+◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'handler', name: 'Demon Handler', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_handler.jpg',
+        moves: {}
+      },
+      {
+        id: 'corpse', name: 'Undead Corpse', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_corpse.jpg',
+        moves: {}
+      },
+      {
+        id: 'scorp', name: 'Scorpion', tag: 'Story', type: 'story',
+        img: 'mksm_scorpion.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻', '◻,◻,◻,O', '◻,◻,◻,△,O', '◻,◻,L1', '◻,◻,R2', '△,△,△']
+        }
+      },
+      {
+        id: 'bossscorp', name: 'Scorpion', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossscorp.jpg',
+        moves: {
+          combos: ['◻,◻,R2', '◻,◻,◻,R2', '◻,◻,◻,△,O', '△,△,△,O', 'O,◻,O,◻', 'O,◻,O,O', 'O,◻,O,△,O'],
+          specials: ['R1+◻', 'R1+△,R2', 'R1+O', '(Air) R1+◻', 'R2+◻', 'L1+◻', 'L1+△']
+        }
+      },
+      {
+        id: 'inferno', name: 'Inferno Scorpion', tag: 'Secret', type: 'secret',
+        img: 'mksm_infernoscorp.jpg',
+        moves: {
+          combos: ['◻,◻,X,O,O,◻,X', '△,△,△,O', 'O,◻,O,◻', 'O,◻,O,O'],
+          specials: ['R1+◻', 'R1+△,R2', 'R1+O', '(Air) R1+◻', 'L1+◻', 'L1+△', 'L1+O', 'R2+◻', 'R2+△', '◻+△'],
+          other: ['Grab: R2']
+        }
+      },
+      {
+        id: 'noob', name: 'Noob Saibot', tag: 'Secret', type: 'secret',
+        img: 'mksm_noob.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,△,△,△', '◻,◻,◻,◻,△,△,O', '◻,◻,◻,◻,△,△,X', '△,X,△,X,△'],
+          specials: ['R1+◻,◻,◻', 'R1+△', '(Air) R1+O,O,O'],
+          other: ['Attack: O']
+        }
+      },
+      {
+        id: 'rain', name: 'Rain', tag: 'Secret', type: 'secret',
+        img: 'mksm_rain.jpg',
+        moves: {
+          combos: ['◻,◻,◻,O,O,O,△,△,△,△', '◻,◻,◻,O,O,O,△,△,△,O', '△,X,△,X,△,X', 'O,O,X,O,△,△,O'],
+          specials: ['R1+◻', 'R1+△,△,△', 'R1+O']
+        }
+      },
+      {
+        id: 'bos', name: 'Brother of Shadow', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_bos.jpg',
+        moves: {}
+      },
+      {
+        id: 'bloodyskeleton', name: 'Bloody Skeleton', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_skeleton.jpg',
+        moves: {}
+      },
+      {
+        id: 'cage', name: 'Johnny Cage', tag: 'Story', type: 'story',
+        img: 'mksm_cage.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,◻,◻,O', '◻,◻,◻,◻,◻,◻', '◻,◻,◻,◻,△', '◻,◻,△'],
+          finishers: ['Multality: ↑,↑,↓,→,△']
+        }
+      },
+      {
+        id: 'bosscage', name: 'Johnny Cage', tag: 'Boss', type: 'boss',
+        img: 'mksm_bosscage.jpg',
+        moves: {
+          combos: ['◻,◻,O,X,O,△,△', '△,△,△,O', 'O,O,X,◻,△,△,O'],
+          specials: ['R1+◻', 'R1+△', '(Air) R1+△', 'R1+◻']
+        }
+      },
+      {
+        id: 'kajin', name: 'Kajin', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_kajin.jpg',
+        moves: {
+          combos: ['◻,◻,◻,X,△,△', '◻,◻,◻,◻,◻', '◻,◻,◻,◻,△', '◻,◻,◻,◻,O', '◻,◻,◻,◻,X', '◻,◻,◻,X,O', '△,△,△,△'],
+          specials: ['R1+◻,◻', 'R1+△', 'R1+O'],
+          other: ['Attack 1: O']
+        }
+      },
+      {
+        id: 'kano', name: 'Kano', tag: 'Secret', type: 'secret',
+        img: 'mksm_kano.jpg',
+        moves: {
+          combos: ['◻,◻,◻,△,◻', '◻,◻,◻,△,△', '◻,◻,◻,△,△,X', '◻,◻,◻,△,X', '◻,◻,◻,△,O', '◻,◻,◻,△,R2', '△,△,△', 'O,O,O', 'O,O,X', 'O,O,R2'],
+          specials: ['R1+◻', 'R1+△', 'R1+O', '(Air) R1+O'],
+          finishers: ['FATALITY: ←,↓,←,→,◻ — THE PRISON (VS ONLY)']
+        }
+      },
+      {
+        id: 'blackdrag', name: 'Black Dragon Merc', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_blackdragon.jpg',
+        moves: {
+          combos: ['◻,◻,◻,X,△,O', '△,X,△,△', 'O,X,△,O,O'],
+          specials: ['R1+◻', 'R1+△,△,△', 'R1+O']
+        }
+      },
+      {
+        id: 'shokan', name: 'Shokan', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_shokan.jpg',
+        moves: {}
+      },
+      {
+        id: 'rept', name: 'Reptile', tag: 'Story', type: 'story',
+        img: 'mksm_reptile.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,O,△', '△,△,△'],
+          specials: ['R1+◻,◻,◻', 'R1+△,△'],
+          finishers: ['Multality: →,↑,→,↑,△']
+        }
+      },
+      {
+        id: 'bossrept', name: 'Reptile', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossreptile.jpg',
+        moves: {
+          combos: ['◻,△,O', '◻,O', '△,O', 'O,O,O'],
+          specials: ['R1+◻,◻,◻', 'L1+◻', 'R1+△,△', 'R1+△,O', 'L1+△', 'R1+O', 'R2']
+        }
+      },
+      {
+        id: 'shang', name: 'Shang Tsung', tag: 'Story', type: 'story',
+        img: 'mksm_shang.jpg',
+        moves: {
+          combos: ['◻,◻,◻,X,X,△,△', '◻,◻,◻,X,X,△,O', '◻,◻,◻,X,X,△,X', '△,△,△'],
+          specials: ['R1+◻,◻,◻,◻', 'R1+△,△,△,△', 'R1+O'],
+          other: ['Attack: O']
+        }
+      },
+      {
+        id: 'bossshang', name: 'Shang Tsung', tag: 'Boss', type: 'boss',
+        img: 'mksm_bossshang.jpg',
+        moves: {
+          combos: ['◻,◻,◻,X,△,O', '△,◻,X,O', 'O,O,△,O', 'O,O,△,R2'],
+          specials: ['R1+◻,◻,◻', 'R1+△,△,△,△', 'R1+O', '(Air) R1+△'],
+          other: ['Grab: R2']
+        }
+      },
+      {
+        id: 'raiden', name: 'Raiden', tag: 'Story', type: 'story',
+        img: 'mksm_raiden.jpg',
+        moves: {
+          combos: ['◻,◻,◻,◻,O,△,△', '△,△,△', '△,△,O', 'O,O,◻,◻,X,△'],
+          specials: ['R1+◻', 'R1+△', 'R1+O']
+        }
+      },
+      {
+        id: 'shadowpriest', name: 'Shadow Priest', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_priest.jpg',
+        moves: {}
+      },
+      {
+        id: 'hellbeast', name: 'Orochi Hellbeast', tag: 'Enemy', type: 'enemy',
+        img: 'mksm_hellbeast.jpg',
+        moves: {}
+      }
+    ];
+
+    const CREDITS = [
+      { name: 'Z Mods', img: 'Z-Mods.jpg' },
+      { name: 'NOTSOMIDWAY', img: 'JINX.jpg' },
+      { name: 'Tnum Modder', img: 'Tnum Modder.jpg' },
+      { name: 'God of Petri', img: 'God of Petri.jpg' },
+      { name: 'Grumpy Cat', img: 'grumpy cat.jpg' },
+      { name: 'Cerbear', img: 'Cerbear.jpg' },
+      { name: 'Tact', img: 'Tact.jpg' },
+      { name: 'Nico220', img: 'Nico.jpg' },
+      { name: 'Nub', img: 'Nub.jpg' },
+      { name: 'Mayo', img: 'Mayo.jpg' }
+    ];
+
+    const CHEAT = ['O', 'X', 'R1', 'L1', 'R1', '△', '◻', 'R2'];
+
+    // ─── PARSE MOVE INPUT ───────────────────────────────────────────────────────
+    function parseInput(str) {
+      const DIRS = ['→', '←', '↑', '↓', '🡺', '🡸', '🡹', '🡻'];
+      const SPECIALS = ['R1', 'R2', 'L1', 'L2'];
+      const BTNS = ['◻', '△', 'O', 'X'];
+
+      const parts = str.split(',');
+      return parts.map((p, i) => {
+        p = p.trim();
+        // Check for note in parens
+        const noteMatch = p.match(/^\((.*?)\)\s*(.*)/);
+        const actualP = noteMatch ? noteMatch[2] : p;
+        const prefix = noteMatch ? `(${noteMatch[1]}) ` : '';
+
+        const tokens = actualP.split('+');
+        const html = tokens.map((t, ti) => {
+          t = t.trim();
+          let cls = 'btn-key';
+          if (DIRS.some(d => t.includes(d))) cls += ' dir-btn';
+          else if (SPECIALS.some(s => t === s)) cls += ' special-btn';
+          else if (t === '◻') cls += ' btn-square';
+          else if (t === '△') cls += ' btn-triangle';
+          else if (t === 'O') cls += ' btn-circle';
+          else if (t === 'X') cls += ' btn-cross';
+          return `<span class="${cls}">${prefix}${t}</span>${ti < tokens.length - 1 ? '<span class="btn-plus">+</span>' : ''}`;
+        }).join('');
+        return html + (i < parts.length - 1 ? '' : '');
+      }).join('<span style="color:rgba(255,255,255,0.2);padding:0 2px;">›</span>');
+    }
+
+    function renderMoveList(arr, labelPrefix) {
+      return arr.map((m, i) => {
+        // Check for note after em-dash or parenthetical at end
+        const noteIdx = m.indexOf(' — ');
+        let moveStr = m, note = '';
+        if (noteIdx !== -1) { moveStr = m.slice(0, noteIdx); note = m.slice(noteIdx + 3); }
+
+        // Split label: colon
+        const colonIdx = moveStr.indexOf(': ');
+        let label = '', input = moveStr;
+        if (colonIdx !== -1) {
+          label = moveStr.slice(0, colonIdx + 1);
+          input = moveStr.slice(colonIdx + 2);
+        } else {
+          label = `${labelPrefix} ${i + 1}:`;
+        }
+
+        return `
+      <div class="move-row">
+        <span class="move-label">${label}</span>
+        <span class="move-input">${parseInput(input)}</span>
+      </div>
+      ${note ? `<span class="move-note">⚠ ${note}</span>` : ''}
+    `;
+      }).join('');
+    }
+
+    function hasMoves(moves) {
+      return (moves.combos?.length || moves.specials?.length || moves.finishers?.length || moves.other?.length);
+    }
+
+    // ─── BUILD THUMBS ───────────────────────────────────────────────────────────
+    const thumbGrid = document.getElementById('thumbGrid');
+    CHARS.forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'char-thumb';
+      div.dataset.type = c.type;
+      div.onclick = () => document.getElementById(c.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      div.innerHTML = `
+    <img src="${BASE}${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.opacity='0.2'">
+    <div class="char-name">
+      ${c.name}
+      <br><span class="tag ${c.type === 'boss' ? 'boss' : ''}">${c.tag}</span>
+    </div>
+  `;
+      thumbGrid.appendChild(div);
+    });
+
+    // ─── BUILD CARDS ────────────────────────────────────────────────────────────
+    const roster = document.getElementById('roster');
+    CHARS.forEach(c => {
+      const badgeClass = { story: 'badge-story', boss: 'badge-boss', secret: 'badge-secret', enemy: 'badge-enemy' }[c.type] || 'badge-enemy';
+      const card = document.createElement('div');
+      card.className = 'char-card';
+      card.id = c.id;
+
+      let movesHTML = '';
+      if (!hasMoves(c.moves)) {
+        movesHTML = '<p class="no-moves">— NO EXTRA COMBOS —</p>';
+      } else {
+        if (c.moves.combos?.length) {
+          movesHTML += `<div class="moves-section"><div class="moves-label">Combos</div>${renderMoveList(c.moves.combos, 'Combo')}</div>`;
+        }
+        if (c.moves.specials?.length) {
+          movesHTML += `<div class="moves-section"><div class="moves-label special">Specials</div>${renderMoveList(c.moves.specials, 'Special')}</div>`;
+        }
+        if (c.moves.other?.length) {
+          movesHTML += `<div class="moves-section"><div class="moves-label">Attacks & Grabs</div>${renderMoveList(c.moves.other, '')}</div>`;
+        }
+        if (c.moves.finishers?.length) {
+          movesHTML += `<div class="moves-section"><div class="moves-label finisher">Finisher</div>${renderMoveList(c.moves.finishers, '')}</div>`;
+        }
+      }
+
+      card.innerHTML = `
+    <div class="char-card-header">
+      <img src="${BASE}${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.opacity='0.1'">
+      <div class="char-card-header-info">
+        <h3>${c.name}</h3>
+        <span class="char-badge ${badgeClass}">${c.tag}</span>
+      </div>
+    </div>
+    <div class="char-card-body">${movesHTML}</div>
+  `;
+      roster.appendChild(card);
+    });
+
+    // ─── CHEAT CODE ─────────────────────────────────────────────────────────────
+    const cheatEl = document.getElementById('cheatDisplay');
+    cheatEl.innerHTML = CHEAT.map(k => `<span class="btn-key special-btn" style="font-size:0.85rem;padding:2px 8px;margin:2px;">${k}</span>`).join('');
+
+    // ─── CREDITS ────────────────────────────────────────────────────────────────
+    const credGrid = document.getElementById('creditsGrid');
+    CREDITS.forEach(cr => {
+      const div = document.createElement('div');
+      div.className = 'credit-item';
+      div.innerHTML = `
+    <img src="${BASE}${cr.img}" alt="${cr.name}" loading="lazy" onerror="this.style.opacity='0.1'">
+    <span>${cr.name}</span>
+  `;
+      credGrid.appendChild(div);
+    });
+
+    // ─── FILTER ─────────────────────────────────────────────────────────────────
+    function filterCards(type, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.char-thumb').forEach(el => {
+        el.style.display = (type === 'all' || el.dataset.type === type) ? '' : 'none';
+      });
+      document.querySelectorAll('.char-card').forEach(el => {
+        const id = el.id;
+        const ch = CHARS.find(c => c.id === id);
+        if (!ch) return;
+        el.style.display = (type === 'all' || ch.type === type) ? '' : 'none';
+      });
+    }
+
+    // ─── INTERSECTION OBSERVER for cards ────────────────────────────────────────
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.char-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.4s ease';
+      obs.observe(el);
+    });
+  </script>
+</body>
+
+</html>
