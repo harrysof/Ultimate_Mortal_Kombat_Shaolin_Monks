@@ -8,6 +8,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --blood: #8b0000;
@@ -651,6 +652,42 @@
       letter-spacing: 0.1em;
     }
 
+    .credit-yt {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 50, 50, 0.6);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .credit-yt:hover {
+      color: #ff2020;
+      transform: scale(1.25);
+    }
+
+    /* ========================= SOCIAL BAR ========================= */
+    .social-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      padding: 1.2rem 1rem 2.5rem;
+    }
+
+    .social-link {
+      color: rgba(232, 220, 200, 0.3);
+      font-size: 1.6rem;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.25s;
+      display: inline-flex;
+    }
+
+    .social-link:hover {
+      color: var(--gold);
+      transform: translateY(-5px);
+    }
+
     /* ========================= BACK TO TOP ========================= */
     .back-top {
       display: block;
@@ -759,7 +796,7 @@
   <header id="top">
     <div class="header-bg"></div>
     <div class="logo-container">
-      <img src="https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/UMKSM.png"
+      <img src="https://harrysof.github.io/Ultimate_Mortal_Kombat_Shaolin_Monks/assets/misc/UMKSM.png"
         alt="Ultimate Mortal Kombat Shaolin Monks Logo">
     </div>
     <p class="mod-author">MOD CREATED BY: RELAXDIRK</p>
@@ -811,6 +848,13 @@
   <!-- CREDITS -->
   <div class="credits-section">
     <h2>Special Thanks</h2>
+    <div class="social-bar">
+      <a href="https://www.facebook.com/profile.php?id=100083520400575" class="social-link" target="_blank" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://x.com/relaxdirk" class="social-link" target="_blank" title="X / Twitter" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/relaxdirk_/" class="social-link" target="_blank" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://discord.gg/eXGsxPAH" class="social-link" target="_blank" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.patreon.com/c/iDirko" class="social-link" target="_blank" title="Patreon" aria-label="Patreon"><i class="fa-brands fa-patreon"></i></a>
+    </div>
     <div class="credits-grid" id="creditsGrid"></div>
   </div>
 
@@ -819,7 +863,7 @@
   <script>
     // ─── DATA ───────────────────────────────────────────────────────────────────
     const BASE = 'https://harrysof.github.io/Ultimate_Mortal_Kombat_Shaolin_Monks/assets/Headshots/';
-    const CREDITS_BASE = 'https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/';
+    const CREDITS_BASE = 'https://harrysof.github.io/Ultimate_Mortal_Kombat_Shaolin_Monks/assets/misc/';
 
     const CHARS = [
       {
@@ -1228,16 +1272,18 @@
     ];
 
     const CREDITS = [
-      { name: 'Z Mods', img: CREDITS_BASE + 'Z-Mods.jpg' },
-      { name: 'NOTSOMIDWAY', img: CREDITS_BASE + 'JINX.jpg' },
-      { name: 'Tnum Modder', img: CREDITS_BASE + 'Tnum Modder.jpg' },
-      { name: 'God of Petri', img: CREDITS_BASE + 'God of Petri.jpg' },
-      { name: 'Grumpy Cat', img: CREDITS_BASE + 'grumpy cat.jpg' },
-      { name: 'Cerbear', img: CREDITS_BASE + 'Cerbear.jpg' },
-      { name: 'Tact', img: CREDITS_BASE + 'Tact.jpg' },
-      { name: 'Nico220', img: CREDITS_BASE + 'Nico.jpg' },
-      { name: 'Nub', img: CREDITS_BASE + 'Nub.jpg' },
-      { name: 'Mayo', img: CREDITS_BASE + 'Mayo.jpg' }
+      { name: 'Z Mods',      img: CREDITS_BASE + 'Z-Mods.jpg',       yt: null },
+      { name: 'NOTSOMIDWAY', img: CREDITS_BASE + 'JINX.jpg',          yt: null },
+      { name: 'Tnum Modder', img: CREDITS_BASE + 'Tnum Modder.jpg',   yt: null },
+      { name: 'God of Petri',img: CREDITS_BASE + 'God of Petri.jpg',  yt: null },
+      { name: 'Grumpy Cat',  img: CREDITS_BASE + 'grumpy cat.jpg',    yt: null },
+      { name: 'Cerbear',     img: CREDITS_BASE + 'Cerbear.jpg',       yt: null },
+      { name: 'Tact',        img: CREDITS_BASE + 'Tact.jpg',          yt: null },
+      { name: 'Nico220',     img: CREDITS_BASE + 'Nico.jpg',          yt: null },
+      { name: 'Nub',         img: CREDITS_BASE + 'Nub.jpg',           yt: null },
+      { name: 'Mayo',        img: CREDITS_BASE + 'Mayo.jpg',          yt: null },
+      { name: 'Nappr',       img: CREDITS_BASE + 'Nappr.jpg',         yt: null },
+      { name: 'Harrysof',    img: CREDITS_BASE + 'Harrysof.jpg',      yt: null }
     ];
 
     const CHEAT = ['O', 'X', 'R1', 'L1', 'R1', '△', '◻', 'R2'];
@@ -1371,6 +1417,7 @@
       div.innerHTML = `
     <img src="${cr.img}" alt="${cr.name}" loading="lazy" onerror="this.style.opacity='0.1'">
     <span>${cr.name}</span>
+    ${cr.yt ? `<a href="${cr.yt}" class="credit-yt" target="_blank" title="${cr.name}'s YouTube"><i class="fa-brands fa-youtube"></i></a>` : ''}
   `;
       credGrid.appendChild(div);
     });
