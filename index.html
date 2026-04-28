@@ -334,36 +334,52 @@
       100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
     }
 
-    /* STORY CARDS */
-    .char-card.story {
+    /* STORY CARDS & THUMBS */
+    .char-card.story, .char-thumb.story {
       border: 2px solid #444;
     }
     
-    .char-card.story .char-card-header img {
+    .char-card.story .char-card-header img, .char-thumb.story img {
       filter: grayscale(40%) contrast(0.9);
       transition: filter 0.3s ease;
     }
 
-    .char-card.story:hover .char-card-header img {
+    .char-card.story:hover .char-card-header img, .char-thumb.story:hover img {
       filter: grayscale(0%) contrast(1.1);
     }
 
-    /* BOSS CARDS */
-    .char-card.boss {
+    /* BOSS CARDS & THUMBS */
+    .char-card.boss, .char-thumb.boss {
       border: 2px solid #ff0000;
       animation: fadeIn 0.5s ease both, boss-pulse 2s infinite ease-in-out;
       position: relative;
       z-index: 1;
     }
 
-    .char-card.boss:hover {
+    .char-card.boss:hover, .char-thumb.boss:hover {
       animation: boss-pulse-fast 0.8s infinite ease-in-out;
       border-color: #ff3333;
-      z-index: 2;
+      z-index: 5;
     }
 
-    .char-card.boss .char-card-header img {
+    .char-card.boss .char-card-header img, .char-thumb.boss img {
       filter: contrast(1.2) brightness(1.1);
+    }
+
+    /* GRIM DARK EFFECT FOR BOSS THUMBS */
+    .char-thumb.boss::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 10%, rgba(60, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.95) 100%);
+      pointer-events: none;
+      z-index: 3;
+      mix-blend-mode: multiply;
+      transition: opacity 0.3s ease;
+    }
+
+    .char-thumb.boss:hover::after {
+      opacity: 0.5;
     }
 
     .char-card-header {
@@ -1396,7 +1412,7 @@
     const thumbGrid = document.getElementById('thumbGrid');
     CHARS.forEach(c => {
       const div = document.createElement('div');
-      div.className = 'char-thumb';
+      div.className = `char-thumb ${c.type}`;
       div.dataset.type = c.type;
       div.onclick = () => document.getElementById(c.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       div.innerHTML = `
