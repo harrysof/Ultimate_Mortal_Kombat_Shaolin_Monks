@@ -3,6 +3,8 @@
 A complete visual overhaul of the original mod page by **RelaxDirk**.  
 All content, characters, and move data belong to him.
 
+https://github.com/user-attachments/assets/28f0f106-a622-496a-ab2f-3f4bb82126e2
+
 ## What's Included
 
 - `umksm.html` — the full site, one single file, no dependencies
