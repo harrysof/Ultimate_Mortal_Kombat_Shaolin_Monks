@@ -1434,7 +1434,7 @@
     <img src="${BASE}${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.opacity='0.2'">
     <div class="char-name">
       ${c.name}
-      <br><span class="tag ${c.type}">${c.tag}</span>
+      ${c.type === 'boss' ? '' : `<br><span class="tag ${c.type}">${c.tag}</span>`}
     </div>
   `;
       thumbGrid.appendChild(div);
