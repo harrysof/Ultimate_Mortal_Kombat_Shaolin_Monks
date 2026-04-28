@@ -288,17 +288,17 @@
     .char-thumb .char-name .tag {
       display: inline-block;
       font-size: 0.5rem;
-      background: var(--blood);
-      color: #fff;
       padding: 1px 4px;
       margin-top: 2px;
       letter-spacing: 0.08em;
       font-family: 'Share Tech Mono', monospace;
+      color: #fff;
     }
 
-    .char-thumb .char-name .tag.boss {
-      background: var(--gold-dim);
-    }
+    .char-thumb .char-name .tag.story { background: rgba(0, 120, 0, 0.8); }
+    .char-thumb .char-name .tag.boss { background: rgba(180, 0, 0, 0.8); }
+    .char-thumb .char-name .tag.enemy { background: rgba(180, 150, 0, 0.8); color: #111; font-weight: bold; }
+    .char-thumb .char-name .tag.secret { background: rgba(200, 50, 150, 0.8); }
 
     /* ========================= CHARACTER DETAIL CARDS ========================= */
     #roster {
@@ -439,27 +439,27 @@
     }
 
     .badge-story {
+      background: rgba(0, 100, 0, 0.6);
+      color: #b3ffb3;
+      border: 1px solid rgba(0, 150, 0, 0.8);
+    }
+
+    .badge-boss {
       background: rgba(139, 0, 0, 0.6);
       color: #ffb3b3;
       border: 1px solid rgba(139, 0, 0, 0.8);
     }
 
-    .badge-boss {
-      background: rgba(122, 92, 30, 0.6);
-      color: #ffe9a0;
-      border: 1px solid rgba(201, 168, 76, 0.5);
-    }
-
     .badge-secret {
-      background: rgba(0, 100, 80, 0.6);
-      color: #a0ffe9;
-      border: 1px solid rgba(0, 200, 160, 0.4);
+      background: rgba(150, 0, 100, 0.6);
+      color: #ffb3e6;
+      border: 1px solid rgba(200, 0, 150, 0.4);
     }
 
     .badge-enemy {
-      background: rgba(30, 30, 60, 0.6);
-      color: #b0b0ff;
-      border: 1px solid rgba(100, 100, 200, 0.4);
+      background: rgba(150, 120, 0, 0.6);
+      color: #ffebb3;
+      border: 1px solid rgba(200, 180, 0, 0.4);
     }
 
     .char-card-body {
@@ -1434,7 +1434,7 @@
     <img src="${BASE}${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.opacity='0.2'">
     <div class="char-name">
       ${c.name}
-      <br><span class="tag ${c.type === 'boss' ? 'boss' : ''}">${c.tag}</span>
+      <br><span class="tag ${c.type}">${c.tag}</span>
     </div>
   `;
       thumbGrid.appendChild(div);
