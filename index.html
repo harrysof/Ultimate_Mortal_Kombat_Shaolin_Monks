@@ -1272,18 +1272,18 @@
     ];
 
     const CREDITS = [
-      { name: 'Z Mods',      img: CREDITS_BASE + 'Z-Mods.jpg',       yt: null },
-      { name: 'NOTSOMIDWAY', img: CREDITS_BASE + 'JINX.jpg',          yt: null },
-      { name: 'Tnum Modder', img: CREDITS_BASE + 'Tnum Modder.jpg',   yt: null },
-      { name: 'God of Petri',img: CREDITS_BASE + 'God of Petri.jpg',  yt: null },
-      { name: 'Grumpy Cat',  img: CREDITS_BASE + 'grumpy cat.jpg',    yt: null },
-      { name: 'Cerbear',     img: CREDITS_BASE + 'Cerbear.jpg',       yt: null },
-      { name: 'Tact',        img: CREDITS_BASE + 'Tact.jpg',          yt: null },
-      { name: 'Nico220',     img: CREDITS_BASE + 'Nico.jpg',          yt: null },
-      { name: 'Nub',         img: CREDITS_BASE + 'Nub.jpg',           yt: null },
-      { name: 'Mayo',        img: CREDITS_BASE + 'Mayo.jpg',          yt: null },
+      { name: 'Z Mods',      img: CREDITS_BASE + 'Z-Mods.jpg',       yt: 'https://www.youtube.com/@Z-Mods' },
+      { name: 'NOTSOMIDWAY', img: CREDITS_BASE + 'JINX.jpg',          yt: 'https://www.youtube.com/@OGmidway' },
+      { name: 'Tnum Modder', img: CREDITS_BASE + 'Tnum Modder.jpg',   yt: 'https://www.youtube.com/@TnumModder' },
+      { name: 'God of Petri',img: CREDITS_BASE + 'God of Petri.jpg',  yt: 'https://www.youtube.com/@godofpetri' },
+      { name: 'Grumpy Cat',  img: CREDITS_BASE + 'grumpy cat.jpg',    yt: 'https://www.youtube.com/@GrumpyCat97' },
+      { name: 'Cerbear',     img: CREDITS_BASE + 'Cerbear.jpg',       yt: 'https://www.youtube.com/@CerBear' },
+      { name: 'Tact',        img: CREDITS_BASE + 'Tact.jpg',          yt: 'https://www.youtube.com/@johntravolta8389' },
+      { name: 'Nico220',     img: CREDITS_BASE + 'Nico.jpg',          yt: 'https://www.youtube.com/@NicoGC220' },
+      { name: 'Nub',         img: CREDITS_BASE + 'Nub.jpg',           yt: 'https://www.youtube.com/@Nub3393' },
+      { name: 'Mayo',        img: CREDITS_BASE + 'Mayo.jpg',          yt: 'https://www.youtube.com/@MayoTheCyberNinja' },
       { name: 'Nappr',       img: CREDITS_BASE + 'Nappr.jpg',         yt: null },
-      { name: 'Harrysof',    img: CREDITS_BASE + 'Harrysof.jpg',      yt: null }
+      { name: 'Harrysof',    img: CREDITS_BASE + 'Harrysof.jpg',      yt: 'https://github.com/harrysof' }
     ];
 
     const CHEAT = ['O', 'X', 'R1', 'L1', 'R1', '△', '◻', 'R2'];
@@ -1417,7 +1417,10 @@
       div.innerHTML = `
     <img src="${cr.img}" alt="${cr.name}" loading="lazy" onerror="this.style.opacity='0.1'">
     <span>${cr.name}</span>
-    ${cr.yt ? `<a href="${cr.yt}" class="credit-yt" target="_blank" title="${cr.name}'s YouTube"><i class="fa-brands fa-youtube"></i></a>` : ''}
+    ${cr.yt ? (() => {
+      const isGH = cr.yt.includes('github.com');
+      return `<a href="${cr.yt}" class="credit-yt" target="_blank" title="${cr.name}'s ${isGH ? 'GitHub' : 'YouTube'}"><i class="fa-brands fa-${isGH ? 'github' : 'youtube'}"></i></a>`;
+    })() : ''}
   `;
       credGrid.appendChild(div);
     });
