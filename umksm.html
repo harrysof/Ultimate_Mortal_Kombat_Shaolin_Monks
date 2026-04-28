@@ -818,17 +818,18 @@
 
   <script>
     // ─── DATA ───────────────────────────────────────────────────────────────────
-    const BASE = 'https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/';
+    const BASE = 'https://raw.githubusercontent.com/harrysof/Ultimate_Mortal_Kombat_Shaolin_Monks/main/assets/Headshots/';
+    const CREDITS_BASE = 'https://relaxdirk.github.io/Ultimate-Mortal-Kombat-Shaolin-Monks/';
 
     const CHARS = [
       {
         id: 'baraka', name: 'Baraka', tag: 'Story', type: 'story',
-        img: 'mksm_baraka.jpg',
+        img: 'baraka.jpeg',
         moves: { combos: ['◻,◻,O,△,△,△,◻,O'], finishers: ['Multality: →,←,→,→,△'] }
       },
       {
         id: 'bossbaraka', name: 'Baraka', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossbaraka.jpg',
+        img: 'baraka.jpeg',
         moves: {
           combos: ['◻,◻,X,O,△,R2', '△,△,◻,R2', 'O,◻,O'],
           specials: ['R1+◻', 'R1+◻,◻', 'R1+◻,△', 'R1+△', 'R1+O', '(Air) R1+△']
@@ -836,7 +837,7 @@
       },
       {
         id: 'mileena', name: 'Mileena', tag: 'Story', type: 'story',
-        img: 'mksm_mileena.jpg',
+        img: 'Mileena.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,△,◻', '◻,◻,◻,◻,△,O', '◻,◻,◻,◻,△,X', '△,△,△,O', '△,△,△'],
           specials: ['R1+◻,◻,◻', 'R1+△', 'R1+O'],
@@ -845,7 +846,7 @@
       },
       {
         id: 'bossmileena', name: 'Mileena', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossmileena.jpg',
+        img: 'Mileena.jpeg',
         moves: {
           combos: ['◻,◻,X,O,△,O', '△,△,O', 'O,O,◻,△,O'],
           specials: ['R1+◻,◻', 'R1+△', 'R1+O', '(Air) R1+◻'],
@@ -854,7 +855,7 @@
       },
       {
         id: 'kabal', name: 'Kabal', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_kabal.jpg',
+        img: 'Kabal.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,O,△,△', '△,△,△', 'O,O,X,X,O,△'],
           specials: ['R1+◻', '(Air) R1+◻', 'R1+△', '(Air) R1+△', 'R1+O']
@@ -862,7 +863,7 @@
       },
       {
         id: 'tarkata', name: 'Tarkata', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_tarkata.jpg',
+        img: 'Tarkata.jpeg',
         moves: {
           combos: ['◻,◻,X,△,O,△,△', '△,△,◻,X,R2', 'O,O,◻,X,△,O'],
           specials: ['R1+◻,◻,◻', 'R1+△,△,△', 'Grab: R1+O']
@@ -870,12 +871,12 @@
       },
       {
         id: 'oniwarlord', name: 'Oni Warlord', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_oniwarlord.jpg',
+        img: 'Oni_Warlord.jpeg',
         moves: {}
       },
       {
         id: 'kitana', name: 'Kitana', tag: 'Story', type: 'story',
-        img: 'mksm_kitana.jpg',
+        img: 'kitana.jpeg',
         moves: {
           combos: ['◻,◻,△,△,O', '◻,◻,△,O,O', '◻,◻,O', '◻,◻,R2'],
           finishers: ['Multality: ←,→,←,↓,△']
@@ -883,7 +884,7 @@
       },
       {
         id: 'bosskitana', name: 'Kitana', tag: 'Boss', type: 'boss',
-        img: 'mksm_bosskitana.jpg',
+        img: 'kitana.jpeg',
         moves: {
           combos: ['◻,△,△,X', '◻,O,X,O', '△,△,X,O', 'O,△,△,O'],
           specials: ['R1,◻', 'R1,△,△', 'R1,O', 'L1,O', '(Air) R1,O']
@@ -891,7 +892,7 @@
       },
       {
         id: 'jade', name: 'Jade', tag: 'Story', type: 'story',
-        img: 'mksm_jade.jpg',
+        img: 'Jade.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,△,O,O,△,△,△', '△,O,△,O,△', 'O,◻,◻,O,△,O'],
           specials: ['R1+◻,◻,◻', 'R1+△', 'R1+O,O,O', '(Air) R1+△']
@@ -899,7 +900,7 @@
       },
       {
         id: 'bossjade', name: 'Jade', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossjade.jpg',
+        img: 'kitana.jpeg',
         moves: {
           combos: ['◻,◻,X,◻,◻,△,△,△', '△,△,△', 'O,◻,◻,△,△,X'],
           specials: ['R1+◻,◻', 'R1+△', '(Air) R1+△', 'R1+O,O,O']
@@ -907,7 +908,7 @@
       },
       {
         id: 'sonya', name: 'Sonya', tag: 'Story', type: 'story',
-        img: 'mksm_sonya.jpg',
+        img: 'sonya.jpeg',
         moves: {
           combos: ['◻,◻,◻,△,O', '△,△,◻', 'O,O,X,◻,◻,△,△'],
           specials: ['R1+◻', 'R1+△', 'R1+O']
@@ -915,24 +916,24 @@
       },
       {
         id: 'captain', name: 'Demon Captain', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_captain.jpg',
+        img: 'Demon_Captain.jpeg',
         moves: {}
       },
       {
         id: 'claysoldier', name: 'Clay Soldier', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_clay.jpg',
+        img: 'Clay_Soldier.jpeg',
         moves: {}
       },
       {
         id: 'sub', name: 'Sub-Zero', tag: 'Story', type: 'story',
-        img: 'mksm_sub.jpg',
+        img: 'Sub-zero.jpeg',
         moves: {
           combos: ['◻,◻,◻,O', '◻,◻,◻,◻', '◻,◻,◻,◻,O', '◻,◻,◻,◻,L1', '◻,◻,◻,◻,△,△', '△,△,△', '△,O,O']
         }
       },
       {
         id: 'bosssub', name: 'Sub-Zero', tag: 'Boss', type: 'boss',
-        img: 'mksm_bosssub.jpg',
+        img: 'Sub-zero.jpeg',
         moves: {
           combos: ['◻,◻,◻', '◻,◻,◻,△,△', '◻,◻,◻,△,O', '◻,◻,◻,△,X', '△,△,△', '△,△,X'],
           specials: ['R1+◻', 'R2+◻', 'R1+△,△', 'R1+△,O', 'R1+O', '(Air) R1+△'],
@@ -941,7 +942,7 @@
       },
       {
         id: 'jax', name: 'Jax', tag: 'Story', type: 'story',
-        img: 'mksm_jax.jpg',
+        img: 'Jax.jpeg',
         moves: {
           combos: ['◻,△,◻,O', '△,△,O', 'O,△,◻,O'],
           specials: ['R1+◻', 'R1+△', 'R1+O']
@@ -949,7 +950,7 @@
       },
       {
         id: 'smoke', name: 'Smoke', tag: 'Secret', type: 'secret',
-        img: 'mksm_smoke.jpg',
+        img: 'Smoke.jpeg',
         moves: {
           combos: ['◻,◻,◻,X,◻,◻,O,△,△', '◻,△,O', '△,△,△,O', 'O,◻,◻,O,△,O'],
           specials: ['R1+◻', 'R1+△', 'R1+O'],
@@ -958,22 +959,22 @@
       },
       {
         id: 'general', name: 'Demon General', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_general.jpg',
+        img: 'Demon_General.jpeg',
         moves: {}
       },
       {
         id: 'reddragon', name: 'Red Dragon', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_reddragon.jpg',
+        img: 'Red_Dragon_Merc.jpeg',
         moves: {}
       },
       {
         id: 'kun', name: 'Kung Lao', tag: 'Story', type: 'story',
-        img: 'mksm_kung.jpg',
+        img: 'Kung_lao.jpeg',
         moves: {}
       },
       {
         id: 'ermac', name: 'Ermac', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossermac.jpg',
+        img: 'Ermac.jpeg',
         moves: {
           combos: ['◻,◻,◻,△,O', '◻,◻,◻,△,X', '◻,◻,◻,△,R2', '◻,◻,◻,X', '◻,◻,◻,R2', '◻,◻,◻,R2,O,O', '△,△', '△,△,O', '△,△,X', '△,△,R2', 'O,△,O', 'O,△,X', 'O,△,X,R2'],
           specials: ['R1+◻', '(Air) R1+◻', 'R1+△,△,△', 'R1+△,R2', 'R1+O,O,O', 'R1+R2'],
@@ -983,7 +984,7 @@
       },
       {
         id: 'kintaro', name: 'Kintaro', tag: 'Story', type: 'story',
-        img: 'mksm_kintaro.jpg',
+        img: 'Kintaro.jpeg',
         moves: {
           other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Grab: R2', 'Taunt: R1+R2'],
           specials: ['R1+◻', 'R1+△', 'R1+O']
@@ -991,7 +992,7 @@
       },
       {
         id: 'bosskintaro', name: 'Kintaro', tag: 'Boss', type: 'boss',
-        img: 'mksm_bosskintaro.jpg',
+        img: 'Kintaro.jpeg',
         moves: {
           other: ['Attack 1: ◻', 'Attack 2: △', 'Taunt: O'],
           specials: ['R1+◻,◻', 'R1+△', 'R1+O']
@@ -999,17 +1000,17 @@
       },
       {
         id: 'oni', name: 'Oni', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_oni.jpg',
+        img: 'Oni.jpeg',
         moves: {}
       },
       {
         id: 'archer', name: 'Demon Archer', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_archer.jpg',
+        img: 'Demon_Archer.jpeg',
         moves: {}
       },
       {
         id: 'cannondemon', name: 'Cannon Demon', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_cannondemon.jpg',
+        img: 'Canon_Demon.jpeg',
         moves: {
           other: ['Attack 1: ◻', 'Attack 2: △', 'Taunt: L1'],
           specials: ['R1+◻,△,O', 'R1+△,△', 'R1+O']
@@ -1017,12 +1018,12 @@
       },
       {
         id: 'liukang', name: 'Liu Kang', tag: 'Story', type: 'story',
-        img: 'mksm_liu.jpg',
+        img: 'Liu_kang.jpeg',
         moves: { combos: ['◻,◻,◻,◻'] }
       },
       {
         id: 'shao', name: 'Shao Kahn', tag: 'Story', type: 'story',
-        img: 'mksm_shaokahn.jpg',
+        img: 'Shao_kahn.jpeg',
         moves: {
           combos: ['Basic: ◻,X,◻,X,O', 'Basic: △,△', 'Hammer: ◻,◻,X'],
           specials: ['Basic: R1+◻,◻,◻', 'Basic: R1+△', 'Basic: R1+O,O', 'Hammer: R1+◻', 'Hammer: R1+△', 'Hammer: R1+O'],
@@ -1031,7 +1032,7 @@
       },
       {
         id: 'bosskahn', name: 'Shao Kahn', tag: 'Boss', type: 'boss',
-        img: 'mksm_kahn.jpg',
+        img: 'Shao_kahn.jpeg',
         moves: {
           combos: ['Basic: ◻,X,O', 'Hammer: ◻,X,O'],
           specials: ['Basic: R1+◻,◻,◻', 'Basic: R1+△', 'Hammer: R1+◻', 'Hammer: R1+△', 'Hammer: R1+O'],
@@ -1040,7 +1041,7 @@
       },
       {
         id: 'bossgoro', name: 'Goro', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossgoro.jpg',
+        img: 'Goro.jpeg',
         moves: {
           other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Taunt: L1', 'Grab: R2'],
           specials: ['Basic: R1+◻,◻,◻,◻', 'Basic: R1+△,△', 'Basic: R1+△,R2', 'Basic: R1+O', 'Pillar: R1+◻', 'Pillar: R1+△', 'Pillar: R1+O', 'Pillar: L1+◻', 'Pillar Grab: R2'],
@@ -1049,7 +1050,7 @@
       },
       {
         id: 'goro', name: 'Goro', tag: 'Story', type: 'story',
-        img: 'mksm_goro.jpg',
+        img: 'Goro.jpeg',
         moves: {
           other: ['Attack 1: ◻', 'Attack 2: △', 'Attack 3: O', 'Taunt: L1', 'Grab: R2'],
           specials: ['R1+◻,◻,◻,◻', 'R1+△,△', 'R1+△,R2', 'R1+O']
@@ -1057,7 +1058,7 @@
       },
       {
         id: 'maskguard', name: 'Mask Guard', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_shangs_masked_guards.jpg',
+        img: 'Mask_Guard.jpeg',
         moves: {
           combos: ['◻,◻,X,◻,O', '△,X,X,O', 'O,O,O,O'],
           specials: ['R1+◻', 'R1+△', 'R1+O']
@@ -1065,24 +1066,24 @@
       },
       {
         id: 'handler', name: 'Demon Handler', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_handler.jpg',
+        img: 'Demon_Handler.jpeg',
         moves: {}
       },
       {
         id: 'corpse', name: 'Undead Corpse', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_corpse.jpg',
+        img: 'Undead_Corpse.jpeg',
         moves: {}
       },
       {
         id: 'scorp', name: 'Scorpion', tag: 'Story', type: 'story',
-        img: 'mksm_scorpion.jpg',
+        img: 'scorpion.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻', '◻,◻,◻,O', '◻,◻,◻,△,O', '◻,◻,L1', '◻,◻,R2', '△,△,△']
         }
       },
       {
         id: 'bossscorp', name: 'Scorpion', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossscorp.jpg',
+        img: 'scorpion.jpeg',
         moves: {
           combos: ['◻,◻,R2', '◻,◻,◻,R2', '◻,◻,◻,△,O', '△,△,△,O', 'O,◻,O,◻', 'O,◻,O,O', 'O,◻,O,△,O'],
           specials: ['R1+◻', 'R1+△,R2', 'R1+O', '(Air) R1+◻', 'R2+◻', 'L1+◻', 'L1+△']
@@ -1090,7 +1091,7 @@
       },
       {
         id: 'inferno', name: 'Inferno Scorpion', tag: 'Secret', type: 'secret',
-        img: 'mksm_infernoscorp.jpg',
+        img: 'Hell_Scorpion.jpeg',
         moves: {
           combos: ['◻,◻,X,O,O,◻,X', '△,△,△,O', 'O,◻,O,◻', 'O,◻,O,O'],
           specials: ['R1+◻', 'R1+△,R2', 'R1+O', '(Air) R1+◻', 'L1+◻', 'L1+△', 'L1+O', 'R2+◻', 'R2+△', '◻+△'],
@@ -1099,7 +1100,7 @@
       },
       {
         id: 'noob', name: 'Noob Saibot', tag: 'Secret', type: 'secret',
-        img: 'mksm_noob.jpg',
+        img: 'Noob_Saibot.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,△,△,△', '◻,◻,◻,◻,△,△,O', '◻,◻,◻,◻,△,△,X', '△,X,△,X,△'],
           specials: ['R1+◻,◻,◻', 'R1+△', '(Air) R1+O,O,O'],
@@ -1108,7 +1109,7 @@
       },
       {
         id: 'rain', name: 'Rain', tag: 'Secret', type: 'secret',
-        img: 'mksm_rain.jpg',
+        img: 'Rain.jpeg',
         moves: {
           combos: ['◻,◻,◻,O,O,O,△,△,△,△', '◻,◻,◻,O,O,O,△,△,△,O', '△,X,△,X,△,X', 'O,O,X,O,△,△,O'],
           specials: ['R1+◻', 'R1+△,△,△', 'R1+O']
@@ -1116,17 +1117,17 @@
       },
       {
         id: 'bos', name: 'Brother of Shadow', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_bos.jpg',
+        img: 'Brother_of_Shadow.jpeg',
         moves: {}
       },
       {
         id: 'bloodyskeleton', name: 'Bloody Skeleton', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_skeleton.jpg',
+        img: 'Bloody_Skeleton.jpeg',
         moves: {}
       },
       {
         id: 'cage', name: 'Johnny Cage', tag: 'Story', type: 'story',
-        img: 'mksm_cage.jpg',
+        img: 'Johnny Cage.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,◻,◻,O', '◻,◻,◻,◻,◻,◻', '◻,◻,◻,◻,△', '◻,◻,△'],
           finishers: ['Multality: ↑,↑,↓,→,△']
@@ -1134,7 +1135,7 @@
       },
       {
         id: 'bosscage', name: 'Johnny Cage', tag: 'Boss', type: 'boss',
-        img: 'mksm_bosscage.jpg',
+        img: 'Johnny Cage.jpeg',
         moves: {
           combos: ['◻,◻,O,X,O,△,△', '△,△,△,O', 'O,O,X,◻,△,△,O'],
           specials: ['R1+◻', 'R1+△', '(Air) R1+△', 'R1+◻']
@@ -1142,7 +1143,7 @@
       },
       {
         id: 'kajin', name: 'Kajin', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_kajin.jpg',
+        img: 'Kaijin.jpeg',
         moves: {
           combos: ['◻,◻,◻,X,△,△', '◻,◻,◻,◻,◻', '◻,◻,◻,◻,△', '◻,◻,◻,◻,O', '◻,◻,◻,◻,X', '◻,◻,◻,X,O', '△,△,△,△'],
           specials: ['R1+◻,◻', 'R1+△', 'R1+O'],
@@ -1151,7 +1152,7 @@
       },
       {
         id: 'kano', name: 'Kano', tag: 'Secret', type: 'secret',
-        img: 'mksm_kano.jpg',
+        img: 'kano.jpeg',
         moves: {
           combos: ['◻,◻,◻,△,◻', '◻,◻,◻,△,△', '◻,◻,◻,△,△,X', '◻,◻,◻,△,X', '◻,◻,◻,△,O', '◻,◻,◻,△,R2', '△,△,△', 'O,O,O', 'O,O,X', 'O,O,R2'],
           specials: ['R1+◻', 'R1+△', 'R1+O', '(Air) R1+O'],
@@ -1160,7 +1161,7 @@
       },
       {
         id: 'blackdrag', name: 'Black Dragon Merc', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_blackdragon.jpg',
+        img: 'Black_Dragon_Merc.jpeg',
         moves: {
           combos: ['◻,◻,◻,X,△,O', '△,X,△,△', 'O,X,△,O,O'],
           specials: ['R1+◻', 'R1+△,△,△', 'R1+O']
@@ -1168,12 +1169,12 @@
       },
       {
         id: 'shokan', name: 'Shokan', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_shokan.jpg',
+        img: 'Shokan.jpeg',
         moves: {}
       },
       {
         id: 'rept', name: 'Reptile', tag: 'Story', type: 'story',
-        img: 'mksm_reptile.jpg',
+        img: 'reptile.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,O,△', '△,△,△'],
           specials: ['R1+◻,◻,◻', 'R1+△,△'],
@@ -1182,7 +1183,7 @@
       },
       {
         id: 'bossrept', name: 'Reptile', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossreptile.jpg',
+        img: 'reptile.jpeg',
         moves: {
           combos: ['◻,△,O', '◻,O', '△,O', 'O,O,O'],
           specials: ['R1+◻,◻,◻', 'L1+◻', 'R1+△,△', 'R1+△,O', 'L1+△', 'R1+O', 'R2']
@@ -1190,7 +1191,7 @@
       },
       {
         id: 'shang', name: 'Shang Tsung', tag: 'Story', type: 'story',
-        img: 'mksm_shang.jpg',
+        img: 'Shang_tsung.jpeg',
         moves: {
           combos: ['◻,◻,◻,X,X,△,△', '◻,◻,◻,X,X,△,O', '◻,◻,◻,X,X,△,X', '△,△,△'],
           specials: ['R1+◻,◻,◻,◻', 'R1+△,△,△,△', 'R1+O'],
@@ -1199,7 +1200,7 @@
       },
       {
         id: 'bossshang', name: 'Shang Tsung', tag: 'Boss', type: 'boss',
-        img: 'mksm_bossshang.jpg',
+        img: 'Shang_tsung.jpeg',
         moves: {
           combos: ['◻,◻,◻,X,△,O', '△,◻,X,O', 'O,O,△,O', 'O,O,△,R2'],
           specials: ['R1+◻,◻,◻', 'R1+△,△,△,△', 'R1+O', '(Air) R1+△'],
@@ -1208,7 +1209,7 @@
       },
       {
         id: 'raiden', name: 'Raiden', tag: 'Story', type: 'story',
-        img: 'mksm_raiden.jpg',
+        img: 'raiden.jpeg',
         moves: {
           combos: ['◻,◻,◻,◻,O,△,△', '△,△,△', '△,△,O', 'O,O,◻,◻,X,△'],
           specials: ['R1+◻', 'R1+△', 'R1+O']
@@ -1216,27 +1217,27 @@
       },
       {
         id: 'shadowpriest', name: 'Shadow Priest', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_priest.jpg',
+        img: 'Shadow_Priest.jpeg',
         moves: {}
       },
       {
         id: 'hellbeast', name: 'Orochi Hellbeast', tag: 'Enemy', type: 'enemy',
-        img: 'mksm_hellbeast.jpg',
+        img: 'Orochi_Hellbeast.jpeg',
         moves: {}
       }
     ];
 
     const CREDITS = [
-      { name: 'Z Mods', img: 'Z-Mods.jpg' },
-      { name: 'NOTSOMIDWAY', img: 'JINX.jpg' },
-      { name: 'Tnum Modder', img: 'Tnum Modder.jpg' },
-      { name: 'God of Petri', img: 'God of Petri.jpg' },
-      { name: 'Grumpy Cat', img: 'grumpy cat.jpg' },
-      { name: 'Cerbear', img: 'Cerbear.jpg' },
-      { name: 'Tact', img: 'Tact.jpg' },
-      { name: 'Nico220', img: 'Nico.jpg' },
-      { name: 'Nub', img: 'Nub.jpg' },
-      { name: 'Mayo', img: 'Mayo.jpg' }
+      { name: 'Z Mods', img: CREDITS_BASE + 'Z-Mods.jpg' },
+      { name: 'NOTSOMIDWAY', img: CREDITS_BASE + 'JINX.jpg' },
+      { name: 'Tnum Modder', img: CREDITS_BASE + 'Tnum Modder.jpg' },
+      { name: 'God of Petri', img: CREDITS_BASE + 'God of Petri.jpg' },
+      { name: 'Grumpy Cat', img: CREDITS_BASE + 'grumpy cat.jpg' },
+      { name: 'Cerbear', img: CREDITS_BASE + 'Cerbear.jpg' },
+      { name: 'Tact', img: CREDITS_BASE + 'Tact.jpg' },
+      { name: 'Nico220', img: CREDITS_BASE + 'Nico.jpg' },
+      { name: 'Nub', img: CREDITS_BASE + 'Nub.jpg' },
+      { name: 'Mayo', img: CREDITS_BASE + 'Mayo.jpg' }
     ];
 
     const CHEAT = ['O', 'X', 'R1', 'L1', 'R1', '△', '◻', 'R2'];
@@ -1368,7 +1369,7 @@
       const div = document.createElement('div');
       div.className = 'credit-item';
       div.innerHTML = `
-    <img src="${BASE}${cr.img}" alt="${cr.name}" loading="lazy" onerror="this.style.opacity='0.1'">
+    <img src="${cr.img}" alt="${cr.name}" loading="lazy" onerror="this.style.opacity='0.1'">
     <span>${cr.name}</span>
   `;
       credGrid.appendChild(div);
