@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Except the project files
+!index.html
+!assets/
+!assets/**
+!.gitignore
