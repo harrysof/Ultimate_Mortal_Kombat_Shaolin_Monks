@@ -314,12 +314,56 @@
       background: linear-gradient(135deg, #0e0000 0%, #111 100%);
       border: 1px solid rgba(139, 0, 0, 0.2);
       overflow: hidden;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
       animation: fadeIn 0.5s ease both;
     }
 
     .char-card:hover {
       border-color: rgba(201, 168, 76, 0.3);
+    }
+
+    @keyframes boss-pulse {
+      0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); }
+    }
+
+    @keyframes boss-pulse-fast {
+      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
+      50% { box-shadow: 0 0 35px rgba(255, 0, 0, 1); }
+      100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
+    }
+
+    /* STORY CARDS */
+    .char-card.story {
+      border: 2px solid #444;
+    }
+    
+    .char-card.story .char-card-header img {
+      filter: grayscale(40%) contrast(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .char-card.story:hover .char-card-header img {
+      filter: grayscale(0%) contrast(1.1);
+    }
+
+    /* BOSS CARDS */
+    .char-card.boss {
+      border: 2px solid #ff0000;
+      animation: fadeIn 0.5s ease both, boss-pulse 2s infinite ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-card.boss:hover {
+      animation: boss-pulse-fast 0.8s infinite ease-in-out;
+      border-color: #ff3333;
+      z-index: 2;
+    }
+
+    .char-card.boss .char-card-header img {
+      filter: contrast(1.2) brightness(1.1);
     }
 
     .char-card-header {
@@ -1282,7 +1326,6 @@
       { name: 'Nico220',     img: CREDITS_BASE + 'Nico.jpg',          yt: 'https://www.youtube.com/@NicoGC220' },
       { name: 'Nub',         img: CREDITS_BASE + 'Nub.jpg',           yt: 'https://www.youtube.com/@Nub3393' },
       { name: 'Mayo',        img: CREDITS_BASE + 'Mayo.jpg',          yt: 'https://www.youtube.com/@MayoTheCyberNinja' },
-      { name: 'Nappr',       img: CREDITS_BASE + 'Nappr.jpg',         yt: null },
       { name: 'Harrysof',    img: CREDITS_BASE + 'Harrysof.jpg',      yt: 'https://github.com/harrysof' }
     ];
 
@@ -1371,7 +1414,7 @@
     CHARS.forEach(c => {
       const badgeClass = { story: 'badge-story', boss: 'badge-boss', secret: 'badge-secret', enemy: 'badge-enemy' }[c.type] || 'badge-enemy';
       const card = document.createElement('div');
-      card.className = 'char-card';
+      card.className = `char-card ${c.type}`;
       card.id = c.id;
 
       let movesHTML = '';
