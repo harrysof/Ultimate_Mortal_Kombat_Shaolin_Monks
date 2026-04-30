@@ -850,6 +850,13 @@
       background: var(--blood);
     }
 
+    .layout-bar { display: flex; justify-content: center; align-items: center; gap: 1rem; padding: 0 1rem 1rem; }
+    .layout-label { font-family: 'Share Tech Mono', monospace; color: rgba(232, 220, 200, 0.6); font-size: 0.7rem; letter-spacing: 0.1em; }
+    .layout-btn { padding: 0.3rem 0.8rem; background: rgba(30, 30, 30, 0.5); border: 1px solid rgba(100, 100, 100, 0.4); color: rgba(255, 255, 255, 0.5); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; border-radius: 4px; display: flex; align-items: center; gap: 0.4rem; }
+    .layout-btn:hover { background: rgba(60, 60, 60, 0.8); color: #fff; }
+    .layout-btn.active { background: var(--blood); border-color: var(--blood-bright); color: #fff; box-shadow: 0 0 10px rgba(139, 0, 0, 0.5); }
+    .btn-key.btn-xbox-y { background: rgba(220, 180, 0, 0.2); border-color: rgba(220, 180, 0, 0.55); color: #ffe066; text-shadow: 0 0 6px rgba(220, 180, 0, 0.6); }
+
     /* Responsive */
     @media (max-width: 480px) {
       .char-grid {
@@ -885,6 +892,12 @@
   <!-- CHARACTERS THUMBNAIL GRID -->
   <div class="section-title">
     <h2>The Roster</h2>
+  </div>
+
+  <div class="layout-bar">
+    <span class="layout-label">CONTROLLER:</span>
+    <button id="btn-ps" class="layout-btn active" onclick="setLayout('ps')"><i class="fa-brands fa-playstation"></i> PS</button>
+    <button id="btn-xbox" class="layout-btn" onclick="setLayout('xbox')"><i class="fa-brands fa-xbox"></i> XBOX</button>
   </div>
 
   <div class="filter-bar">
@@ -935,7 +948,26 @@
   <a href="#top" class="back-top">▲ Return to the Top ▲</a>
 
   <script>
-    // ─── DATA ───────────────────────────────────────────────────────────────────
+    // ─── DATA & STATE ───────────────────────────────────────────────────────────
+    let currentLayout = 'ps';
+    const XBOX_MAP = { '◻': 'X', '△': 'Y', 'O': 'B', 'X': 'A', 'L1': 'LB', 'L2': 'LT', 'R1': 'RB', 'R2': 'RT' };
+
+    function setLayout(layout) {
+      currentLayout = layout;
+      document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + layout).classList.add('active');
+      
+      const cheatPrefix = document.querySelector('.cheat-prefix');
+      if (layout === 'xbox') {
+        cheatPrefix.textContent = 'Hover over OPTIONS and HOLD LT, then press:';
+      } else {
+        cheatPrefix.textContent = 'Hover over OPTIONS and HOLD L2, then press:';
+      }
+      
+      renderCards();
+      renderCheat();
+    }
+
     const BASE = 'https://harrysof.github.io/Ultimate_Mortal_Kombat_Shaolin_Monks/assets/Headshots/';
     const CREDITS_BASE = 'https://harrysof.github.io/Ultimate_Mortal_Kombat_Shaolin_Monks/assets/misc/';
 
@@ -1378,14 +1410,15 @@
         const tokens = actualP.split('+');
         const html = tokens.map((t, ti) => {
           t = t.trim();
+          let tStr = currentLayout === 'xbox' ? (XBOX_MAP[t] || t) : t;
           let cls = 'btn-key';
           if (DIRS.some(d => t.includes(d))) cls += ' dir-btn';
           else if (SPECIALS.some(s => t === s)) cls += ' special-btn';
-          else if (t === '◻') cls += ' btn-square';
-          else if (t === '△') cls += ' btn-triangle';
+          else if (t === '◻') cls += (currentLayout === 'xbox' ? ' btn-cross' : ' btn-square');
+          else if (t === '△') cls += (currentLayout === 'xbox' ? ' btn-xbox-y' : ' btn-triangle');
           else if (t === 'O') cls += ' btn-circle';
-          else if (t === 'X') cls += ' btn-cross';
-          return `<span class="${cls}">${prefix}${t}</span>${ti < tokens.length - 1 ? '<span class="btn-plus">+</span>' : ''}`;
+          else if (t === 'X') cls += (currentLayout === 'xbox' ? ' btn-triangle' : ' btn-cross');
+          return `<span class="${cls}">${prefix}${tStr}</span>${ti < tokens.length - 1 ? '<span class="btn-plus">+</span>' : ''}`;
         }).join('');
         return html + (i < parts.length - 1 ? '' : '');
       }).join('<span style="color:rgba(255,255,255,0.2);padding:0 2px;">›</span>');
@@ -1442,7 +1475,9 @@
 
     // ─── BUILD CARDS ────────────────────────────────────────────────────────────
     const roster = document.getElementById('roster');
-    CHARS.forEach(c => {
+    function renderCards() {
+      roster.innerHTML = '';
+      CHARS.forEach(c => {
       const badgeClass = { story: 'badge-story', boss: 'badge-boss', secret: 'badge-secret', enemy: 'badge-enemy' }[c.type] || 'badge-enemy';
       const card = document.createElement('div');
       card.className = `char-card ${c.type}`;
@@ -1476,12 +1511,33 @@
     </div>
     <div class="char-card-body">${movesHTML}</div>
   `;
-      roster.appendChild(card);
-    });
+        roster.appendChild(card);
+      });
+
+      // Re-apply filter
+      filterCards(currentFilterType);
+
+      // Re-observe cards
+      document.querySelectorAll('.char-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.4s ease';
+        obs.observe(el);
+      });
+    }
 
     // ─── CHEAT CODE ─────────────────────────────────────────────────────────────
     const cheatEl = document.getElementById('cheatDisplay');
-    cheatEl.innerHTML = CHEAT.map(k => `<span class="btn-key special-btn" style="font-size:0.85rem;padding:2px 8px;margin:2px;">${k}</span>`).join('');
+    function renderCheat() {
+      cheatEl.innerHTML = CHEAT.map(t => {
+        let tStr = currentLayout === 'xbox' ? (XBOX_MAP[t] || t) : t;
+        let cls = 'btn-key special-btn';
+        if (t === '◻') cls += (currentLayout === 'xbox' ? ' btn-cross' : ' btn-square');
+        else if (t === '△') cls += (currentLayout === 'xbox' ? ' btn-xbox-y' : ' btn-triangle');
+        else if (t === 'O') cls += ' btn-circle';
+        else if (t === 'X') cls += (currentLayout === 'xbox' ? ' btn-triangle' : ' btn-cross');
+        return `<span class="${cls}" style="font-size:0.85rem;padding:2px 8px;margin:2px;">${tStr}</span>`;
+      }).join('');
+    }
 
     // ─── CREDITS ────────────────────────────────────────────────────────────────
     const credGrid = document.getElementById('creditsGrid');
@@ -1500,9 +1556,18 @@
     });
 
     // ─── FILTER ─────────────────────────────────────────────────────────────────
+    let currentFilterType = 'all';
     function filterCards(type, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      currentFilterType = type;
+      if (btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else {
+        // Re-highlight active button on layout change re-render
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.textContent.toLowerCase() === type);
+        if (activeBtn) activeBtn.classList.add('active');
+      }
 
       document.querySelectorAll('.char-thumb').forEach(el => {
         el.style.display = (type === 'all' || el.dataset.type === type) ? '' : 'none';
@@ -1522,11 +1587,9 @@
       });
     }, { threshold: 0.05 });
 
-    document.querySelectorAll('.char-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transition = 'opacity 0.4s ease';
-      obs.observe(el);
-    });
+    // Initial Render
+    renderCards();
+    renderCheat();
   </script>
 </body>
 
