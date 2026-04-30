@@ -189,6 +189,41 @@
       }
     }
 
+    /* ========================= SECTION DIVIDER ========================= */
+    .divider {
+      text-align: center;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .return-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      padding: 0.6rem;
+      width: 100%;
+      background: rgba(139, 0, 0, 0.15);
+      border: 1px solid rgba(139, 0, 0, 0.4);
+      color: rgba(232, 220, 200, 0.7);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    }
+
+    .return-btn:hover {
+      background: rgba(139, 0, 0, 0.6);
+      border-color: var(--blood-bright);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(139, 0, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
     /* ========================= SECTION TITLE ========================= */
     .section-title {
       text-align: center;
@@ -1497,7 +1532,12 @@
         <span class="char-badge ${badgeClass}">${c.tag}</span>
       </div>
     </div>
-    <div class="char-card-body">${movesHTML}</div>
+    <div class="char-card-body">
+      ${movesHTML}
+      <button class="return-btn" onclick="document.getElementById('characters').scrollIntoView({ behavior: 'smooth', block: 'start' })">
+        <i class="fa-solid fa-angles-up"></i> Return to Roster
+      </button>
+    </div>
   `;
         roster.appendChild(card);
       });
