@@ -322,17 +322,6 @@
       border-color: rgba(201, 168, 76, 0.3);
     }
 
-    @keyframes boss-pulse {
-      0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
-      100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); }
-    }
-
-    @keyframes boss-pulse-fast {
-      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
-      50% { box-shadow: 0 0 35px rgba(255, 0, 0, 1); }
-      100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
-    }
 
     /* STORY CARDS & THUMBS */
     .char-card.story .char-card-header img, .char-thumb.story img {
@@ -346,13 +335,12 @@
 
     /* BOSS CARDS & THUMBS */
     .char-card.boss, .char-thumb.boss {
-      animation: fadeIn 0.5s ease both, boss-pulse 2s infinite ease-in-out;
+      animation: fadeIn 0.5s ease both;
       position: relative;
       z-index: 1;
     }
 
     .char-card.boss:hover, .char-thumb.boss:hover {
-      animation: boss-pulse-fast 0.8s infinite ease-in-out;
       z-index: 5;
     }
 
