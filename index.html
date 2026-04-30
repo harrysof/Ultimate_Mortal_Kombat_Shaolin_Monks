@@ -231,6 +231,35 @@
       position: relative;
     }
 
+    .gallery-link-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(139, 0, 0, 0.2);
+      border: 1px solid rgba(139, 0, 0, 0.5);
+      color: rgba(232, 220, 200, 0.9);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      z-index: 10;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+
+    .gallery-link-btn:hover {
+      background: rgba(139, 0, 0, 0.6);
+      border-color: var(--blood-bright);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+
     .section-title h2 {
       font-family: 'Cinzel Decorative', cursive;
       font-size: clamp(1.4rem, 4vw, 2.5rem);
@@ -898,6 +927,9 @@
 
   <!-- HEADER -->
   <header id="top">
+    <a href="gallery.html" class="gallery-link-btn">
+      <i class="fa-solid fa-image"></i> MKSM GALLERY
+    </a>
     <div class="header-bg"></div>
     <div class="logo-container">
       <img src="assets/misc/UMKSM.png"

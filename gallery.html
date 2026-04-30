@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MKSM Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --blood: #8b0000;
+      --blood-bright: #cc0000;
+      --gold: #c9a84c;
+      --gold-dim: #7a5c1e;
+      --ash: #1a1a1a;
+      --bone: #e8dcc8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cinzel', serif;
+      background: radial-gradient(circle at 50% 0%, rgba(60, 10, 10, 1) 0%, rgba(10, 10, 10, 1) 100%);
+      background-attachment: fixed;
+      color: var(--bone);
+      min-height: 100vh;
+    }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 2px solid var(--gold-dim);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery-title {
+      font-family: 'Cinzel Decorative', serif;
+      color: var(--gold);
+      font-size: 2.5rem;
+      text-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+      margin: 0;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(139, 0, 0, 0.2);
+      border: 1px solid rgba(139, 0, 0, 0.5);
+      color: rgba(232, 220, 200, 0.8);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+    }
+
+    .back-btn:hover {
+      background: var(--blood);
+      color: #fff;
+      border-color: var(--blood-bright);
+      box-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .header-spacer {
+      width: 200px;
+    }
+
+    /* GRID */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .header-spacer {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .gallery-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .gallery-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* TRADITIONAL FRAME */
+    .gallery-item {
+      position: relative;
+      cursor: pointer;
+      background: #000;
+      border: 4px solid var(--gold-dim);
+      box-shadow: 
+        0 0 0 4px #000, 
+        0 0 0 6px var(--blood), 
+        0 15px 30px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 0 0 4px #000, 
+        0 0 0 6px var(--blood-bright), 
+        0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .gallery-item:hover::after {
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: filter 0.3s ease, transform 0.5s ease;
+      filter: saturate(0.8) contrast(1.1);
+    }
+
+    .gallery-item:hover img {
+      filter: saturate(1.1) contrast(1.2);
+      transform: scale(1.05);
+    }
+
+    .item-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9) 30%, #000);
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border: 2px solid var(--gold-dim);
+      box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      display: block;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: var(--bone);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover {
+      color: var(--blood-bright);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="gallery-header">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> RETURN TO ROSTER</a>
+    <h1 class="gallery-title">MKSM GALLERY</h1>
+    <div class="header-spacer"></div>
+  </header>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Items generated here -->
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <i class="fa-solid fa-xmark lightbox-close" onclick="closeLightbox()"></i>
+      <img id="lightboxImg" src="" alt="Fullscreen asset">
+    </div>
+  </div>
+
+  <script>
+    const ASSET_PATH = 'assets/Full_Body_Shots/';
+    const IMAGES = [
+      "Baraka.jpeg", "Black_Dragon_Merc.jpeg", "Bloody_Skeleton.jpeg", "Brother_of_Shadow.jpeg", 
+      "Canon_Demon.jpeg", "Clay_Soldier.jpeg", "Demon_Archer.jpeg", "Demon_Captain.jpeg", 
+      "Demon_General.jpeg", "Demon_Handler.jpeg", "Ermac.jpeg", "Goro.jpeg", 
+      "Hell_Scorpion.jpeg", "Jade.jpeg", "Jax.jpeg", "Johnny Cage.jpeg", 
+      "Kabal.jpeg", "Kaijin.jpeg", "Kano.jpeg", "Kintaro.jpeg", 
+      "Kitana.jpeg", "Kung_lao.jpeg", "Liu_kang.jpeg", "Mask_Guard.jpeg", 
+      "Mileena.jpeg", "Noob_Saibot.jpeg", "Oni.jpeg", "Oni_Warlord.jpeg", 
+      "Orochi_Hellbeast.jpeg", "Raiden.jpeg", "Rain.jpeg", "Red_Dragon_Merc.jpeg", 
+      "Reptile.jpeg", "Scorpion.jpeg", "Shadow_Priest.jpeg", "Shang_tsung.jpeg", 
+      "Shao_kahn.jpeg", "Shokan.jpeg", "Smoke.jpeg", "Sonya.jpeg", 
+      "Sub-zero.jpeg", "Tarkata.jpeg", "Undead_Corpse.jpeg"
+    ];
+
+    // Format filename to nice name
+    function formatName(filename) {
+      return filename.replace('.jpeg', '').replace(/_/g, ' ');
+    }
+
+    const grid = document.getElementById('galleryGrid');
+
+    IMAGES.forEach(file => {
+      const name = formatName(file);
+      const div = document.createElement('div');
+      div.className = 'gallery-item';
+      div.onclick = () => openLightbox(ASSET_PATH + file);
+      
+      div.innerHTML = `
+        <img src="${ASSET_PATH}${file}" alt="${name}" loading="lazy">
+        <div class="item-label">${name}</div>
+      `;
+      grid.appendChild(div);
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>

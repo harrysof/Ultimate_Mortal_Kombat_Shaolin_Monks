@@ -3,6 +3,7 @@
 
 # Except the project files
 !index.html
+!gallery.html
 !assets/
 !assets/**
 !.gitignore
