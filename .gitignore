@@ -1,9 +1,1 @@
-# Ignore everything
-*
-
-# Except the project files
-!index.html
-!gallery.html
-!assets/
-!assets/**
-!.gitignore
+(index.html is a source file, so according to rule 6, since there are no build artifacts, dependencies, or temp files in the changes, the output should be empty)
