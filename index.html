@@ -1042,7 +1042,11 @@
       {
         id: 'baraka', name: 'Baraka', tag: 'Story', type: 'story',
         img: 'baraka.jpeg',
-        moves: { combos: ['◻,◻,O,△,△,△,◻,O'], finishers: ['Multality: →,←,→,→,△'] }
+        moves: {
+          specials: ['R1+◻ — Blade Spark', 'R1+◻,◻ — Jump Spark', 'R1+△ — Blade Slam', 'R1+O — Blade Chop', 'R1+△ (Air) — Blade Spin', 'R1+R2 — Dragon Grapple', 'R1+R2,◻ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Slam'],
+          combos: ['△,R2 — Blade Flip', '◻,◻,O,O — Baraka Rush Down', '◻,◻,◻,R2 — Blade Throw', '◻,△,O — Baraka Slash'],
+          finishers: ['Fatality: ↓,←,→,→,◻ — Blade Lift', 'Fatality: ←,←,←,←,◻ — Blade Decapitation']
+        }
       },
       {
         id: 'bossbaraka', name: 'Baraka', tag: 'Boss', type: 'boss',
@@ -1095,8 +1099,9 @@
         id: 'kitana', name: 'Kitana', tag: 'Story', type: 'story',
         img: 'kitana.jpeg',
         moves: {
-          combos: ['◻,◻,△,△,O', '◻,◻,△,O,O', '◻,◻,O', '◻,◻,R2'],
-          finishers: ['Multality: ←,→,←,↓,△']
+          specials: ['R1+◻ — Teleport', 'R1+△ — Fan Lift', 'R1+O — Fan Toss', 'R1+O (Air) — Air Fan Toss', 'R1+R2 — Enemy Manipulation', 'R1+R2,◻ — Head Smack', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Hit'],
+          combos: ['◻,◻,◻,O — Fan Flurry', '△,△,O — Wind Wave', '◻,◻,◻,△ — Quick Draw Double Backflip'],
+          finishers: ['Fatality: ←,←,→,→,◻ — Head Chop', 'Fatality: →,→,→,→,◻ — Kiss of Death']
         }
       },
       {
@@ -1142,13 +1147,12 @@
         moves: {}
       },
       {
-      {
         id: 'sub', name: 'Sub-Zero', tag: 'Story', type: 'story',
         img: 'Sub-zero.jpeg',
         moves: {
-          combos: ['Y,X,X — Ice Ender', 'X,X,B,Y — Auto Launcher', 'X,X,B,X — Freeze Ender', 'X,X,X,X,X (Air) — More Air Hits', 'X,X,X,R2 — Special Throw'],
-          specials: ['R1+□ — Ice Ball', 'R1+□,□ — Ice Burst', 'R1+□ (Air) — Air Ice Ball', 'R1+□,□,□ — Ice Shower', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+○ — Slide', 'Hold R1+○ (2 sec) — Freeze Slide', 'R1+○,○ — Ice Clone', 'R1+R2 — Dragon Grapple', 'R1+R2,□ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,○ — Power Slam'],
-          finishers: ['Fatality: ↓,←,↑,→,□ — Shatter', 'Fatality: ←,↑,↑,→,□ — Ice Spike', 'Fatality: ←,→,↓,↓,□ — Frozen Head', 'Fatality: ↑,→,↓,←,□ — Deep Freeze', 'Fatality: ↓,→,←,←,□ — Ice Blast', 'Fatality: ←,←,←,↑,□ — Brutal Chill', 'Multality: ↑,↓,↑,↓,△ — Ice Storm', 'Multality: ←,→,↑,↑,△ — Freeze Frame', 'Brutality: ↑,↓,←,↑,○ — Frostbite Rage']
+          combos: ['△,◻,◻ — Ice Ender', '△,O — Run Ender', '◻,△,O — Run Ender (Alt)', '◻,◻,O,△ — Auto Launcher', '◻,◻,O,◻ — Freeze Ender', '◻,◻,◻,◻,◻ (Air) — More Air Hits', '◻,◻,◻,R2 — Special Throw'],
+          specials: ['R1+◻ — Ice Ball', 'R1+◻,◻ — Ice Burst', 'R1+◻ (Air) — Air Ice Ball', 'R1+◻,◻,◻ — Ice Shower', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+O — Slide', 'Hold R1+O (2 sec) — Freeze Slide', 'R1+O,O — Ice Clone', 'R1+R2 — Dragon Grapple', 'R1+R2,◻ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Slam', 'R1+R2 + ↕ — Directional Throw'],
+          finishers: ['Fatality: ↓,←,↑,→,◻ — Shatter', 'Fatality: ←,↑,↑,→,◻ — Ice Spike', 'Fatality: ←,→,↓,↓,◻ — Frozen Head', 'Fatality: ↑,→,↓,←,◻ — Deep Freeze', 'Fatality: ↓,→,←,←,◻ — Ice Blast', 'Fatality: ←,←,←,↑,◻ — Brutal Chill', 'Multality: ↑,↓,↑,↓,△ — Ice Storm', 'Multality: ←,→,↑,↑,△ — Freeze Frame', 'Brutality: ↑,↓,←,↑,O — Frostbite Rage']
         }
       },
       {
@@ -1191,9 +1195,9 @@
         id: 'kun', name: 'Kung Lao', tag: 'Story', type: 'story',
         img: 'Kung_lao.jpeg',
         moves: {
-          combos: ['Y,X,X — Stun Ender', 'Y (Running) — Auto Launcher', 'B,Y,X — Run Ender Var 1', 'B,B,Y — Run Ender Var 2', 'X,X,X,X,X (Air) — Air Combo', 'X,X,X,R2 — Special Throw'],
-          specials: ['R1+□ — Teleport', 'R1+□,□ — Double Teleport', 'R1+□ + Stun — Teleport Stun', 'R1+△ — Spin Attack', 'R1+△,△,△ — Spin Repeat', 'R1+△,○ — Pulse Spin', 'R1+○ — Hat Toss Straight', 'R1+○ — Hat Toss Ricochet', 'Hold R1+○ (2 sec) — Hat Toss Spin', 'Hold R1+○ (3 sec) — Hat Option', 'R1+R2 — Enemy Manipulation', 'R1+R2,□ — Head Smack', 'R1+R2,△ — Flip Up', 'R1+R2,○ — Power Slam'],
-          finishers: ['Fatality: ↓,←,→,→,□ — Hat Slice', 'Fatality: ←,→,↑,↑,□ — Whirlwind', 'Fatality: →,→,←,↓,□ — Tele-Destroy', 'Multality: ↑,↓,↑,↓,△ — Hat Trick', 'Multality: ←,→,↑,↑,△ — Spin Cycle', 'Brutality: →,↑,↓,↓,○ — Shaved']
+          combos: ['△,◻,◻ — Stun Ender', '△ (Running) — Auto Launcher', 'O,△,◻ — Run Ender Var 1', 'O,O,△ — Run Ender Var 2', '◻,◻,◻,◻,◻ (Air) — Air Combo', '◻,◻,◻,R2 — Special Throw'],
+          specials: ['R1+◻ — Teleport', 'R1+◻,◻ — Double Teleport', 'R1+◻ + Stun — Teleport Stun', 'R1+△ — Spin Attack', 'R1+△,△,△ — Spin Repeat', 'R1+△,O — Pulse Spin', 'R1+O — Hat Toss Straight', 'R1+O — Hat Toss Ricochet', 'Hold R1+O (2 sec) — Hat Toss Spin', 'Hold R1+O (3 sec) — Hat Option', 'R1+R2 — Enemy Manipulation', 'R1+R2,◻ — Head Smack', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Slam'],
+          finishers: ['Fatality: ↓,←,→,→,◻ — Hat Slice', 'Fatality: ←,→,↑,↑,◻ — Whirlwind', 'Fatality: →,→,←,↓,◻ — Tele-Destroy', 'Multality: ↑,↓,↑,↓,△ — Hat Trick', 'Multality: ←,→,↑,↑,△ — Spin Cycle', 'Brutality: →,↑,↓,↓,O — Shaved']
         }
       },
       {
@@ -1244,9 +1248,9 @@
         id: 'liukang', name: 'Liu Kang', tag: 'Story', type: 'story',
         img: 'Liu_kang.jpeg',
         moves: {
-          combos: ['Y,X,X — Fire Ender', 'X,X,B,Y — Auto Launcher', 'X,X,B,X — Fire Kick Ender', 'X,X,X,X,X (Air) — More Air Kombo Hits', 'X,X,X,R2 — Special Throw'],
-          specials: ['R1+□ — Fireball', 'R1+□,□ — High/Low Fireball', 'R1+□ (Air) — Air Fireball', 'R1+□,□,□ — Fireburst Fireball', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+○ — Flying Kick', 'Hold R1+○ (2 sec) — Bicycle Kick', 'Hold R1+○ (2 sec),○ — Bicycle/Flying Kick', 'R1+R2 — Dragon Grapple', 'R1+R2,□ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,○ — Power Slam'],
-          finishers: ['Fatality: ↓,←,↑,→,□ — Shaolin Soccer', 'Fatality: ←,↑,↑,→,□ — Bonebreaker Combo', 'Fatality: ←,→,↓,↓,□ — Fire/Kick Combo', 'Fatality: ↑,→,↓,←,□ — Flipping Uppercut', 'Fatality: ↓,→,←,←,□ — Dragon', 'Fatality: ←,←,←,↑,□ — Giant Stomp', 'Fatality: →,↑,→,↑,□ — Head Clap', 'Fatality: ↓,←,→,↑,□ — Arm Rip (Hidden)', 'Multality: ↑,↓,↑,↓,△ — Fire Trails', 'Multality: ←,→,↑,↑,△ — Dragons Fury', 'Brutality: →,↑,↓,↓,○ — Rage Mode']
+          combos: ['△,◻,◻ — Fire Ender', '△,O — Run Ender', '◻,△,O — Run Ender (Alt)', '◻,◻,O,△ — Auto Launcher', '◻,◻,O,◻ — Fire Kick Ender', '◻,◻,◻,◻,◻ (Air) — More Air Kombo Hits', '◻,◻,◻,R2 — Special Throw'],
+          specials: ['R1+◻ — Fireball', 'R1+◻,◻ — High/Low Fireball', 'R1+◻ (Air) — Air Fireball', 'R1+◻,◻,◻ — Fireburst Fireball', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+O — Flying Kick', 'Hold R1+O (2 sec) — Bicycle Kick', 'Hold R1+O (2 sec),O — Bicycle/Flying Kick', 'R1+R2 — Dragon Grapple', 'R1+R2,◻ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Slam', 'R1+R2 + ↕ — Directional Throw'],
+          finishers: ['Fatality: ↓,←,↑,→,◻ — Shaolin Soccer', 'Fatality: ←,↑,↑,→,◻ — Bonebreaker Combo', 'Fatality: ←,→,↓,↓,◻ — Fire/Kick Combo', 'Fatality: ↑,→,↓,←,◻ — Flipping Uppercut', 'Fatality: ↓,→,←,←,◻ — Dragon', 'Fatality: ←,←,←,↑,◻ — Giant Stomp', 'Fatality: →,↑,→,↑,◻ — Head Clap', 'Fatality: ↓,←,→,↑,◻ — Arm Rip (Hidden)', 'Multality: ↑,↓,↑,↓,△ — Fire Trails', 'Multality: ←,→,↑,↑,△ — Dragons Fury', 'Brutality: →,↑,↓,↓,O — Rage Mode']
         }
       },
       {
@@ -1306,9 +1310,9 @@
         id: 'scorp', name: 'Scorpion', tag: 'Story', type: 'story',
         img: 'scorpion.jpeg',
         moves: {
-          combos: ['Y,X,X — Spear Ender', 'X,X,B,Y — Auto Launcher', 'X,X,B,X — Flame Ender', 'X,X,X,X,X (Air) — More Air Hits', 'X,X,X,R2 — Special Throw'],
-          specials: ['R1+□ — Spear', 'R1+□,□ — Multi-Spear', 'R1+□ (Air) — Air Spear', 'R1+□,□,□ — Flame Spear', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+○ — Teleport', 'R1+○,○ — Teleport Strike', 'R1+○,○,○ — Teleport Flame', 'R1+R2 — Dragon Grapple', 'R1+R2,□ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,○ — Power Slam'],
-          finishers: ['Fatality: ↓,←,↑,→,□ — Toasty', 'Fatality: ←,↑,↑,→,□ — Spear Impale', 'Fatality: ←,→,↓,↓,□ — Flame Breath', 'Fatality: ↑,→,↓,←,□ — Back Breaker', 'Fatality: ↓,→,←,←,□ — Hell Spawn', 'Multality: ↑,↓,↑,↓,△ — Flame Trail', 'Multality: ←,→,↑,↑,△ — Spear Frenzy', 'Brutality: →,↑,↓,↓,○ — Inferno']
+          combos: ['△,◻,◻ — Spear Ender', '△,O — Run Ender', '◻,△,O — Run Ender (Alt)', '◻,◻,O,△ — Auto Launcher', '◻,◻,O,◻ — Flame Ender', '◻,◻,◻,◻,◻ (Air) — More Air Hits', '◻,◻,◻,R2 — Special Throw'],
+          specials: ['R1+◻ — Spear', 'R1+◻,◻ — Multi-Spear', 'R1+◻ (Air) — Air Spear', 'R1+◻,◻,◻ — Flame Spear', 'R1+△ — Uppercut', 'R1+△,△ — Uppercut 2', 'R1+△,△,△ — Uppercut 3', 'R1+△,△,△,△ — Uppercut 4', 'R1+O — Teleport', 'R1+O,O — Teleport Strike', 'R1+O,O,O — Teleport Flame', 'R1+R2 — Dragon Grapple', 'R1+R2,◻ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Slam', 'R1+R2 + ↕ — Directional Throw'],
+          finishers: ['Fatality: ↓,←,↑,→,◻ — Toasty', 'Fatality: ←,↑,↑,→,◻ — Spear Impale', 'Fatality: ←,→,↓,↓,◻ — Flame Breath', 'Fatality: ↑,→,↓,←,◻ — Back Breaker', 'Fatality: ↓,→,←,←,◻ — Hell Spawn', 'Multality: ↑,↓,↑,↓,△ — Flame Trail', 'Multality: ←,→,↑,↑,△ — Spear Frenzy', 'Brutality: →,↑,↓,↓,O — Inferno']
         }
       },
       {
@@ -1359,8 +1363,9 @@
         id: 'cage', name: 'Johnny Cage', tag: 'Story', type: 'story',
         img: 'Johnny Cage.jpeg',
         moves: {
-          combos: ['◻,◻,◻,◻,◻,◻,O', '◻,◻,◻,◻,◻,◻', '◻,◻,◻,◻,△', '◻,◻,△'],
-          finishers: ['Multality: ↑,↑,↓,→,△']
+          specials: ['R1+◻ — Projectile Attack', 'R1+◻,◻,◻ — Quick Draw', 'R1+△ — Shadow Uppercut', 'R1+O — Shadow Kick', 'R1+R2 — Enemy Manipulation', 'R1+R2,◻ — Head Smack', 'R1+R2,△ — Flip Up', 'R1+R2,O — Ground Slam'],
+          combos: ['◻,◻,O — Nut Punch', '△,△,O — Roundhouse of Doom!', 'O,△ — Run Ender Launcher', 'O,◻ — Light Run Ender', 'O,O — Heavy Run Ender'],
+          finishers: ['Fatality: →,→,→,→,◻ — Head Decap', 'Fatality: ↓,↓,→,→,◻ — Torso Rip', 'Fatality: ↑,←,←,←,◻ — Nut Buster']
         }
       },
       {
@@ -1406,9 +1411,9 @@
         id: 'rept', name: 'Reptile', tag: 'Story', type: 'story',
         img: 'reptile.jpeg',
         moves: {
-          combos: ['◻,◻,◻,◻,O,△', '△,△,△'],
-          specials: ['R1+◻,◻,◻', 'R1+△,△'],
-          finishers: ['Multality: →,↑,→,↑,△']
+          specials: ['R1+◻ — Acid Spit', 'R1+△ — Slide', 'Hold R1+O (2 sec) — Quick Orb', 'Hold R1+O (3 sec) — Slow Homing Orb', 'R1+R2 — Dragon Grapple', 'R1+R2,◻ — Run off Back', 'R1+R2,△ — Flip Up', 'R1+R2,O — Power Attack'],
+          combos: ['◻,◻,◻,O — Double Kick', '△,◻,◻,O — Lizard Rush', '△,O — Green Lunge', '△,△,O — Acid Summon'],
+          finishers: ['Fatality: ←,→,←,↓,◻ — Head Eat', 'Fatality: ←,←,←,↓,◻ — Hidden Chomp', 'Fatality: ↑,↑,→,←,◻ — Face Claw']
         }
       },
       {
